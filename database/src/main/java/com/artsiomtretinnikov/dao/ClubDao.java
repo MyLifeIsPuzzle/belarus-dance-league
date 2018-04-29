@@ -20,7 +20,7 @@ public class ClubDao {
         Optional<Club> club;
 
         try (Session session = FACTORY.openSession()) {
-            club = Optional.of(session.find(Club.class, 1L));
+            club = Optional.of(session.find(Club.class, clubId));
         }
 
         return club;
