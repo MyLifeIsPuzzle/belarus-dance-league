@@ -17,13 +17,14 @@ public class ClubDao {
     private static final SessionFactory FACTORY = new Configuration().configure().buildSessionFactory();
 
     public Optional<Club> getClubById(Long clubId) {
-        Optional<Club> club;
-
         try (Session session = FACTORY.openSession()) {
-            club = Optional.of(session.find(Club.class, clubId));
+            Club result = session.find(Club.class , clubId);
+            if (result != null) {
+                return Optional.of(result);
+            } else {
+                throw new RuntimeException("Empty search result");
+            }
         }
-
-        return club;
     }
 
     public static ClubDao getInstance() {

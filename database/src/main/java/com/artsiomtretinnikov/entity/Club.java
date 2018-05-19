@@ -1,34 +1,27 @@
 package com.artsiomtretinnikov.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@Builder
 @Entity
 @Table(name = "club", schema = "dance_league")
-public class Club {
+public class Club extends BaseEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @Column(name = "info")
@@ -36,4 +29,19 @@ public class Club {
 
     @Column(name = "active")
     private boolean active;
+
+    @OneToMany(mappedBy = "id.club")
+    private Set<ClubCoach> clubCoaches;
+
+    @OneToMany(mappedBy = "club")
+    private Set<DanceGroup> danceGroups;
+
+    @ManyToMany(mappedBy = "clubs")
+    private Set<Coach> coaches = new HashSet<>();
+
+    public Club(String name, String info, boolean active) {
+        this.name = name;
+        this.info = info;
+        this.active = active;
+    }
 }
