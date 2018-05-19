@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -30,17 +29,19 @@ public class Coach extends BaseHumanInfoEntity {
     @Column(name = "info")
     private String info;
 
-    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "coach")
     private Set<DanceClass> danceClasses = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id")
+    @OneToOne(mappedBy = "coach")
     private Account account;
 
     @OneToMany(mappedBy = "id.coach")
     private Set<ClubCoach> clubCoaches;
 
-    @ManyToMany(mappedBy = "coaches")
+    @ManyToMany
+    @JoinTable(name = "club_coach", schema = "dance_league",
+            joinColumns = {@JoinColumn(name = "coach_id")},
+            inverseJoinColumns = {@JoinColumn(name = "club_id")})
     private Set<Club> clubs = new HashSet<>();
 
     public Coach(String name, String secondName, boolean active, String info, Set<DanceClass> danceClasses,
@@ -53,4 +54,9 @@ public class Coach extends BaseHumanInfoEntity {
         this.clubs = clubs;
     }
 
+    public Coach(String name, String secondName, boolean active, String info, Set<Club> clubs) {
+        super(name, secondName, active);
+        this.info = info;
+        this.clubs = clubs;
+    }
 }

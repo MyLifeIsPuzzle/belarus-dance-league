@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -24,7 +23,7 @@ import java.time.LocalTime;
 @Table(name = "dance_class", schema = "dance_league")
 public class DanceClass extends BaseEntity<Long> {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "dance_group_id", nullable = false)
     private DanceGroup danceGroup;
 
@@ -32,7 +31,7 @@ public class DanceClass extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private Style style;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "coach_id")
     private Coach coach;
 
@@ -40,7 +39,7 @@ public class DanceClass extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private DayOfWeek dayOfWeek;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "dancing_hall_id")
     private DancingHall dancingHall;
 
@@ -48,5 +47,5 @@ public class DanceClass extends BaseEntity<Long> {
     private LocalTime time;
 
     @Column(name = "active")
-    private Boolean isActive = true;
+    private boolean active = true;
 }

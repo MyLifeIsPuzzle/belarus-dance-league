@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -39,7 +41,10 @@ public class Dancer extends BaseHumanInfoEntity {
     @Enumerated(EnumType.STRING)
     private League league;
 
-    @ManyToMany(mappedBy = "dancers")
+    @ManyToMany
+    @JoinTable(name = "dancer_dance_group", schema = "dance_league",
+            joinColumns = {@JoinColumn(name = "dancer_id")},
+            inverseJoinColumns = {@JoinColumn(name = "dance_group_id")})
     private Set<DanceGroup> danceGroups = new HashSet<>();
 
     @OneToMany(mappedBy = "id.dancer")
@@ -48,19 +53,16 @@ public class Dancer extends BaseHumanInfoEntity {
     @OneToMany(mappedBy = "dancer")
     private List<Rating> ratings = new ArrayList<>();
 
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     public Dancer(String name, String secondName, boolean active, LocalDate dateOfBirth, AgeCategory ageCategory,
-                  League league, Set<DanceGroup> danceGroups, Set<DancerDanceGroup> dancerDanceGroups,
-                  List<Rating> ratings, String phoneNumber) {
+                  League league, Set<DanceGroup> danceGroups, String phoneNumber) {
         super(name, secondName, active);
         this.dateOfBirth = dateOfBirth;
         this.ageCategory = ageCategory;
         this.league = league;
         this.danceGroups = danceGroups;
-        this.dancerDanceGroups = dancerDanceGroups;
-        this.ratings = ratings;
         this.phoneNumber = phoneNumber;
     }
 }

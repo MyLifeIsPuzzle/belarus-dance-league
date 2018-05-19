@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -30,7 +29,7 @@ public class Request extends BaseEntity<Long> {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "group_id")
     private DanceGroup danceGroup;
 
@@ -38,5 +37,5 @@ public class Request extends BaseEntity<Long> {
     private String phoneNumber;
 
     @Column(name = "active")
-    private Boolean isActive = true;
+    private boolean active = true;
 }

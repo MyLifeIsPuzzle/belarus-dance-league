@@ -21,6 +21,6 @@ public class ClubCoach {
     @EmbeddedId
     private ComplexForClubCoach id;
 
-    @Column(name = "active")
+    @Column(name = "active", columnDefinition = "boolean default true")
     private boolean active;
 }

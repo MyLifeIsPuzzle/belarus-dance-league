@@ -7,8 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,9 +36,12 @@ public class Club extends BaseEntity<Long> {
     @OneToMany(mappedBy = "club")
     private Set<DanceGroup> danceGroups;
 
-    @ManyToMany
-    @JoinTable(name = "club_coach", schema = "dance_league",
-            joinColumns = {@JoinColumn(name = "club_id")},
-            inverseJoinColumns = {@JoinColumn(name = "coach_id")})
+    @ManyToMany(mappedBy = "clubs")
     private Set<Coach> coaches = new HashSet<>();
+
+    public Club(String name, String info, boolean active) {
+        this.name = name;
+        this.info = info;
+        this.active = active;
+    }
 }

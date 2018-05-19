@@ -7,9 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -28,14 +26,11 @@ public class DanceGroup extends BaseEntity<Long> {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "club_id")
     private Club club;
 
-    @ManyToMany
-    @JoinTable(name = "dancer_dance_group", schema = "dance_league",
-            joinColumns = {@JoinColumn(name = "dance_group_id")},
-            inverseJoinColumns = {@JoinColumn(name = "dancer_id")})
+    @ManyToMany(mappedBy = "danceGroups")
     private Set<Dancer> dancers = new HashSet<>();
 
     @OneToMany(mappedBy = "id.danceGroup")
@@ -48,5 +43,11 @@ public class DanceGroup extends BaseEntity<Long> {
     private Set<Request> requests = new HashSet<>();
 
     @Column(name = "active")
-    private Boolean isActive = true;
+    private boolean active = true;
+
+    public DanceGroup(String name, Club club, boolean active) {
+        this.name = name;
+        this.club = club;
+        this.active = active;
+    }
 }

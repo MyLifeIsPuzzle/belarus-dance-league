@@ -9,25 +9,26 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
+@Table(name = "rating", schema = "dance_league")
 public class Rating extends BaseEntity<Long> {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dancer_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "dancer_id")
     private Dancer dancer;
 
-    @Column(name = "style", nullable = false)
+    @Column(name = "value")
+    private int value;
+
+    @Column(name = "style")
     @Enumerated(EnumType.STRING)
     private Style style;
-
-    @Column(name = "value", nullable = false)
-    private int value;
 }

@@ -21,7 +21,7 @@ import java.util.Set;
 @Table(name = "dancing_hall", schema = "dance_league")
 public class DancingHall extends BaseEntity<Long> {
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", unique = true)
     private String name;
 
     @Embedded
@@ -31,5 +31,11 @@ public class DancingHall extends BaseEntity<Long> {
     private Set<DanceClass> danceClasses = new HashSet<>();
 
     @Column(name = "active", nullable = false)
-    private Boolean isActive = true;
+    private boolean active = true;
+
+    public DancingHall(String name, Address address, boolean active) {
+        this.name = name;
+        this.address = address;
+        this.active = active;
+    }
 }
