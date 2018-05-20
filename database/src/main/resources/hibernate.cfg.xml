@@ -13,7 +13,7 @@
         <property name="format_sql">true</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
 
-        <!--<property name="hbm2ddl.auto">create</property>-->
+        <property name="hbm2ddl.auto">create</property>
 
         <mapping class="com.artsiomtretinnikov.entity.Club"/>
         <mapping class="com.artsiomtretinnikov.entity.Coach"/>

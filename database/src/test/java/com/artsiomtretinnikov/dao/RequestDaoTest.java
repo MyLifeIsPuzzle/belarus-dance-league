@@ -29,7 +29,7 @@ public class RequestDaoTest extends BaseDaoImpl<Long, Request> {
     @Test
     public void saveTest(){
         Assert.assertNotNull(save(new Request("Name", "Second name", LocalDate.now(),
-                SESSION_FACTORY.openSession().find(DanceGroup.class, 1L), "111-11-11", true)));
+                SESSION_FACTORY.openSession().find(DanceGroup.class, 1L), "111-11-11")));
     }
 
     @Test

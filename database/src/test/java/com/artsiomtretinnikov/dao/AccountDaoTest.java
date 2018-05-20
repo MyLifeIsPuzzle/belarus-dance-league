@@ -27,7 +27,7 @@ public class AccountDaoTest extends BaseDaoImpl<Long, Account> {
 
     @Test
     public void saveTest() {
-        Assert.assertNotNull(save(new Account("Test email", "Test password", true,
+        Assert.assertNotNull(save(new Account("Test email", "Test password",
                 SESSION_FACTORY.openSession().get(Coach.class, 1L), SESSION_FACTORY.openSession().get(Role.class, 2L))));
     }
 

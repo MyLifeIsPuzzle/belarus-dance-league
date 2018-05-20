@@ -30,12 +30,8 @@ public class DancingHall extends BaseEntity<Long> {
     @OneToMany(mappedBy = "dancingHall")
     private Set<DanceClass> danceClasses = new HashSet<>();
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
-
-    public DancingHall(String name, Address address, boolean active) {
+    public DancingHall(String name, Address address) {
         this.name = name;
         this.address = address;
-        this.active = active;
     }
 }

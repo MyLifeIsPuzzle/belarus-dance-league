@@ -27,9 +27,6 @@ public class Club extends BaseEntity<Long> {
     @Column(name = "info")
     private String info;
 
-    @Column(name = "active")
-    private boolean active;
-
     @OneToMany(mappedBy = "id.club")
     private Set<ClubCoach> clubCoaches;
 
@@ -39,9 +36,8 @@ public class Club extends BaseEntity<Long> {
     @ManyToMany(mappedBy = "clubs")
     private Set<Coach> coaches = new HashSet<>();
 
-    public Club(String name, String info, boolean active) {
+    public Club(String name, String info) {
         this.name = name;
         this.info = info;
-        this.active = active;
     }
 }

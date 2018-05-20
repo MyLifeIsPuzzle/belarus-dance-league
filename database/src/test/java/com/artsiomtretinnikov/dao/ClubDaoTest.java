@@ -26,7 +26,7 @@ public class ClubDaoTest extends BaseDaoImpl<Long, Club>  {
 
     @Test
     public void saveTest() {
-        Assert.assertNotNull(save(new Club("Test name", "Test info", true)));
+        Assert.assertNotNull(save(new Club("Test name", "Test info")));
     }
 
     @Test

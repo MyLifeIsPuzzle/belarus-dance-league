@@ -45,7 +45,4 @@ public class DanceClass extends BaseEntity<Long> {
 
     @Column(name = "time")
     private LocalTime time;
-
-    @Column(name = "active")
-    private boolean active = true;
 }

@@ -35,7 +35,4 @@ public class Request extends BaseEntity<Long> {
 
     @Column(name = "phone_number")
     private String phoneNumber;
-
-    @Column(name = "active")
-    private boolean active = true;
 }

@@ -23,6 +23,6 @@ public class DancerDanceGroup {
     @EmbeddedId
     private ComplexForDancerDanceGroup id;
 
-    @Column(name = "active")
+    @Column(name = "active", columnDefinition = "boolean default true")
     private boolean active;
 }

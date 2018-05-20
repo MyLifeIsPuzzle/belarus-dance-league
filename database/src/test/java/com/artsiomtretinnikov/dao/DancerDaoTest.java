@@ -40,7 +40,7 @@ public class DancerDaoTest extends BaseDaoImpl<Long, Dancer> {
 
     @Test
     public void saveTest() {
-        Assert.assertNotNull(save(new Dancer("Test name", "Test second name", true, LocalDate.now(), AgeCategory.ADULT,
+        Assert.assertNotNull(save(new Dancer("Test name", "Test second name", LocalDate.now(), AgeCategory.ADULT,
                 League.BEGINNER, new HashSet<>(Collections.singletonList(SESSION_FACTORY.openSession().get(DanceGroup.class, 5L))),
                 "111-11-11")));
     }

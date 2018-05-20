@@ -44,9 +44,9 @@ public class Coach extends BaseHumanInfoEntity {
             inverseJoinColumns = {@JoinColumn(name = "club_id")})
     private Set<Club> clubs = new HashSet<>();
 
-    public Coach(String name, String secondName, boolean active, String info, Set<DanceClass> danceClasses,
+    public Coach(String name, String secondName, String info, Set<DanceClass> danceClasses,
                  Account account, Set<ClubCoach> clubCoaches, Set<Club> clubs) {
-        super(name, secondName, active);
+        super(name, secondName);
         this.info = info;
         this.danceClasses = danceClasses;
         this.account = account;
@@ -54,8 +54,8 @@ public class Coach extends BaseHumanInfoEntity {
         this.clubs = clubs;
     }
 
-    public Coach(String name, String secondName, boolean active, String info, Set<Club> clubs) {
-        super(name, secondName, active);
+    public Coach(String name, String secondName, String info, Set<Club> clubs) {
+        super(name, secondName);
         this.info = info;
         this.clubs = clubs;
     }

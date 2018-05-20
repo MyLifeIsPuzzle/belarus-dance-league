@@ -36,7 +36,7 @@ public class DancingHallDaoTest extends BaseDaoImpl<Long, DancingHall> {
 
     @Test
     public void saveTest() {
-        assertNotNull(save(new DancingHall("Test hall", new Address("Minsk", "Belskogo 12", "Great hall"), true)));
+        assertNotNull(save(new DancingHall("Test hall", new Address("Minsk", "Belskogo 12", "Great hall"))));
     }
 
     @Test

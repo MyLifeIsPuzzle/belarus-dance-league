@@ -16,4 +16,8 @@ public interface BaseDao<PK extends Serializable, T extends BaseEntity<PK>> {
     void update(T object);
 
     void delete(T object);
+
+    List<T> findAllActive();
+
+    List<T> findAllInactive();
 }

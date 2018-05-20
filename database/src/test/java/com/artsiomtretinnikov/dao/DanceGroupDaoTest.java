@@ -27,7 +27,7 @@ public class DanceGroupDaoTest extends BaseDaoImpl<Long, DanceGroup> {
     @Test
     public void saveTest() {
         Assert.assertNotNull(save(new DanceGroup("Test name",
-                SESSION_FACTORY.openSession().get(Club.class, 1L), true)));
+                SESSION_FACTORY.openSession().get(Club.class, 1L))));
     }
 
     @Test

@@ -37,7 +37,7 @@ public class CoachDaoTest extends BaseDaoImpl<Long, Coach> {
 
     @Test
     public void saveTest() {
-        Assert.assertNotNull(save(new Coach("Test name", "Test surname", true, "Test info",
+        Assert.assertNotNull(save(new Coach("Test name", "Test surname", "Test info",
                 new HashSet<>(Collections.singletonList(SESSION_FACTORY.openSession().get(Club.class, 1L))))));
     }
 

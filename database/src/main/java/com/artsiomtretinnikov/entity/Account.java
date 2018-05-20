@@ -26,9 +26,6 @@ public class Account extends BaseEntity<Long> {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "active")
-    private boolean active = true;
-
     @OneToOne
     @JoinColumn(name = "coach_id")
     private Coach coach;

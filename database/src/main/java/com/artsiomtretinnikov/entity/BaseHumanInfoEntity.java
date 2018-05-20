@@ -27,6 +27,9 @@ public class BaseHumanInfoEntity extends BaseEntity<Long> {
     @Column(name = "second_name", nullable = false)
     private String secondName;
 
-    @Column(name = "active", nullable = false)
-    private boolean active;
+    public BaseHumanInfoEntity(String name, String secondName, boolean active) {
+        super(active);
+        this.name = name;
+        this.secondName = secondName;
+    }
 }

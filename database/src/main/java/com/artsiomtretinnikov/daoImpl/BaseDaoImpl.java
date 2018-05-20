@@ -2,12 +2,14 @@ package com.artsiomtretinnikov.daoImpl;
 
 import com.artsiomtretinnikov.dao.BaseDao;
 import com.artsiomtretinnikov.entity.BaseEntity;
+import com.artsiomtretinnikov.entity.BaseEntity_;
 import com.artsiomtretinnikov.manager.SessionFactoryManager;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
 
@@ -67,5 +69,32 @@ public class BaseDaoImpl<PK extends Serializable, T extends BaseEntity<PK>> impl
             session.delete(object);
             session.getTransaction().commit();
         }
+    }
+
+    @Override
+    public List<T> findAllActive() {
+        return returnActiveOrInactive(true);
+    }
+
+    @Override
+    public List<T> findAllInactive() {
+        return returnActiveOrInactive(false);
+    }
+
+    private List<T> returnActiveOrInactive(boolean active) {
+        List<T> result;
+
+        try (Session session = SESSION_FACTORY.openSession()) {
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+
+            CriteriaQuery<T> criteria = cb.createQuery(clazz);
+            Root<T> root = criteria.from(clazz);
+
+            criteria.select(root).where(cb.equal(root.get(BaseEntity_.active), active));
+
+            result = session.createQuery(criteria).list();
+        }
+
+        return result;
     }
 }

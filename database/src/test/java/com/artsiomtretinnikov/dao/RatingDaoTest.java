@@ -62,6 +62,9 @@ public class RatingDaoTest extends BaseDaoImpl<Long, Rating> {
         update(rating);
 
         Assert.assertEquals(5, find(1L).getValue());
+
+        rating.setValue(125);
+        update(rating);
     }
 
     @Test
@@ -85,6 +88,22 @@ public class RatingDaoTest extends BaseDaoImpl<Long, Rating> {
         assertThat(ratings, hasSize(2));
         values = ratings.stream().map(Rating::getValue).collect(Collectors.toList());
         assertThat(values, Matchers.contains(115, 27));
+    }
+
+    @Test
+    public void findAllActiveTest() {
+        List<Rating> ratings = RatingDaoImpl.getInstance().findAllActive();
+        assertThat(ratings, hasSize(15));
+        List<Integer> values = ratings.stream().map(Rating::getValue).collect(Collectors.toList());
+        assertThat(values, Matchers.contains(125, 122, 121, 128, 123, 121, 126, 1425, 1465, 1415, 17, 11, 115, 121, 141));
+    }
+
+    @Test
+    public void findAllInactiveTest() {
+        List<Rating> ratings = RatingDaoImpl.getInstance().findAllInactive();
+        assertThat(ratings, hasSize(2));
+        List<Integer> values = ratings.stream().map(Rating::getValue).collect(Collectors.toList());
+        assertThat(values, Matchers.contains(17, 27));
     }
 
     @AfterClass

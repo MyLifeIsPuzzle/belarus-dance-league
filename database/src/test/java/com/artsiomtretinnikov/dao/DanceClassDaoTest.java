@@ -34,7 +34,7 @@ public class DanceClassDaoTest extends BaseDaoImpl<Long, DanceClass> {
     public void saveTest() {
         Assert.assertNotNull(save(new DanceClass(SESSION_FACTORY.openSession().get(DanceGroup.class, 1L),
                 Style.DISCO, SESSION_FACTORY.openSession().get(Coach.class, 1L),
-                DayOfWeek.FRIDAY, SESSION_FACTORY.openSession().get(DancingHall.class, 1L), LocalTime.now(), true)));
+                DayOfWeek.FRIDAY, SESSION_FACTORY.openSession().get(DancingHall.class, 1L), LocalTime.now())));
     }
 
     @Test

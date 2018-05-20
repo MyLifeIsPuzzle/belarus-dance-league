@@ -42,12 +42,8 @@ public class DanceGroup extends BaseEntity<Long> {
     @OneToMany(mappedBy = "danceGroup")
     private Set<Request> requests = new HashSet<>();
 
-    @Column(name = "active")
-    private boolean active = true;
-
-    public DanceGroup(String name, Club club, boolean active) {
+    public DanceGroup(String name, Club club) {
         this.name = name;
         this.club = club;
-        this.active = active;
     }
 }

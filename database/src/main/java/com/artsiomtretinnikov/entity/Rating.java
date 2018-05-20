@@ -31,4 +31,11 @@ public class Rating extends BaseEntity<Long> {
     @Column(name = "style")
     @Enumerated(EnumType.STRING)
     private Style style;
+
+    public Rating(boolean active, Dancer dancer, int value, Style style) {
+        super(active);
+        this.dancer = dancer;
+        this.value = value;
+        this.style = style;
+    }
 }
