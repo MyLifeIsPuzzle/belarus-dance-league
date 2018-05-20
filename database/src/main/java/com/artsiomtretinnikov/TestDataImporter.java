@@ -1,4 +1,4 @@
-package com.artsiomtretinnikov.util;
+package com.artsiomtretinnikov;
 
 import com.artsiomtretinnikov.entity.Account;
 import com.artsiomtretinnikov.entity.Address;

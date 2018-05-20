@@ -1,12 +1,12 @@
 package com.artsiomtretinnikov.dao;
 
+import com.artsiomtretinnikov.TestDataImporter;
 import com.artsiomtretinnikov.daoImpl.BaseDaoImpl;
 import com.artsiomtretinnikov.entity.Coach;
 import com.artsiomtretinnikov.entity.DanceClass;
 import com.artsiomtretinnikov.entity.DanceGroup;
 import com.artsiomtretinnikov.entity.DancingHall;
 import com.artsiomtretinnikov.entity.Style;
-import com.artsiomtretinnikov.util.TestDataImporter;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.junit.AfterClass;

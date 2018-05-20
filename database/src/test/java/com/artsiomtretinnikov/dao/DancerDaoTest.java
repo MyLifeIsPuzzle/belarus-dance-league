@@ -1,5 +1,6 @@
 package com.artsiomtretinnikov.dao;
 
+import com.artsiomtretinnikov.TestDataImporter;
 import com.artsiomtretinnikov.daoImpl.BaseDaoImpl;
 import com.artsiomtretinnikov.daoImpl.DancerDaoImpl;
 import com.artsiomtretinnikov.entity.AgeCategory;
@@ -7,7 +8,6 @@ import com.artsiomtretinnikov.entity.BaseHumanInfoEntity;
 import com.artsiomtretinnikov.entity.DanceGroup;
 import com.artsiomtretinnikov.entity.Dancer;
 import com.artsiomtretinnikov.entity.League;
-import com.artsiomtretinnikov.util.TestDataImporter;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.junit.AfterClass;

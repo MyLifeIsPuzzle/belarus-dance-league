@@ -1,10 +1,10 @@
 package com.artsiomtretinnikov.dao;
 
+import com.artsiomtretinnikov.TestDataImporter;
 import com.artsiomtretinnikov.daoImpl.BaseDaoImpl;
 import com.artsiomtretinnikov.entity.Account;
 import com.artsiomtretinnikov.entity.Coach;
 import com.artsiomtretinnikov.entity.Role;
-import com.artsiomtretinnikov.util.TestDataImporter;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.junit.AfterClass;
