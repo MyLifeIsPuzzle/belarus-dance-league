@@ -16,11 +16,11 @@ import lombok.ToString;
 @Builder
 public class RatingDto {
 
-    Long id;
+    private Long id;
 
-    Dancer dancer;
+    private Dancer dancer;
 
-    int value;
+    private int value;
 
-    String style;
+    private String style;
 }
