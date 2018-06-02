@@ -56,9 +56,9 @@ public class Dancer extends BaseHumanInfoEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public Dancer(String name, String secondName, boolean active, LocalDate dateOfBirth, AgeCategory ageCategory,
+    public Dancer(String name, String secondName, LocalDate dateOfBirth, AgeCategory ageCategory,
                   League league, Set<DanceGroup> danceGroups, String phoneNumber) {
-        super(name, secondName, active);
+        super(name, secondName);
         this.dateOfBirth = dateOfBirth;
         this.ageCategory = ageCategory;
         this.league = league;
