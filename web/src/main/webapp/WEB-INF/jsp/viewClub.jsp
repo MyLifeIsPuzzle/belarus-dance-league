@@ -5,8 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-${requestScope.club.id}
-${requestScope.club.name}
-${requestScope.club.info}
+${club.id}
+${club.name}
+${club.info}
 </body>
 </html>

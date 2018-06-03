@@ -19,4 +19,9 @@ public class Role extends BaseEntity<Long> {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
+
+    public Role(boolean active, String name) {
+        super(active);
+        this.name = name;
+    }
 }
