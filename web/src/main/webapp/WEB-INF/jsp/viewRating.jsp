@@ -10,21 +10,21 @@
     <form action="${pageContext.request.contextPath}/rating" method="get">
         <label>
             <select name="style">
-                <c:forEach var="style" items="${requestScope.styles}">
+                <c:forEach var="style" items="${styles}">
                     <option value="${style}">${style}</option>
                 </c:forEach>
             </select>
         </label><br>
         <label>
-            <select name="agecategory">
-                <c:forEach var="agecategory" items="${requestScope.agecategorys}">
-                    <option value="${agecategory}">${agecategory}</option>
+            <select name="ageCategory">
+                <c:forEach var="ageCategory" items="${ageCategories}">
+                    <option value="${ageCategory}">${ageCategory}</option>
                 </c:forEach>
             </select>
         </label><br>
         <label>
             <select name="league">
-                <c:forEach var="league" items="${requestScope.leagues}">
+                <c:forEach var="league" items="${leagues}">
                     <option value="${league}">${league}</option>
                 </c:forEach>
             </select>
