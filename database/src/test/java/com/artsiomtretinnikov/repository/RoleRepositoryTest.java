@@ -49,12 +49,10 @@ public class RoleRepositoryTest {
     @Test
     public void deleteTest() {
         Optional<Role> role = roleRepository.findById(3L);
-        if (role.isPresent()) {
-            roleRepository.delete(role.get());
-            assertFalse(roleRepository.findById(3L).isPresent());
-        } else {
-            fail();
-        }
+        assertTrue(role.isPresent());
+        roleRepository.delete(role.get());
+        assertFalse(roleRepository.findById(3L).isPresent());
+
     }
 
     @Test

@@ -42,12 +42,15 @@ public class RatingService {
     }
 
     private List<RatingDto> modelToDto(List<Rating> ratings) {
-        return ratings.stream().map(rating -> RatingDto.builder()
+        return ratings.stream().map(this::convertModelToDto).collect(Collectors.toList());
+    }
+
+    private RatingDto convertModelToDto(Rating rating) {
+        return RatingDto.builder()
                 .id(rating.getId())
                 .dancer(rating.getDancer())
                 .style(rating.getStyle().getName())
                 .value(rating.getValue())
-                .build())
-                .collect(Collectors.toList());
+                .build();
     }
 }

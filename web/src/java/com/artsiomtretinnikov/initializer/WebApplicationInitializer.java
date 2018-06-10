@@ -1,5 +1,6 @@
 package com.artsiomtretinnikov.initializer;
 
+import com.artsiomtretinnikov.config.ServiceConfiguration;
 import com.artsiomtretinnikov.config.WebConfiguration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -9,7 +10,7 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[0];
+        return new Class<?>[]{ServiceConfiguration.class};
     }
 
     @Override
