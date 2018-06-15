@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <form th:action="@{/rating}" method="get" th:text="#{}">
+        <div th:each="style : ${styles}">
+            <input clazz="checkbox"
+                   th:value="${ingredient}"
+                   th:field="*{ingredients}">
+            <span th:text="${#strings.capitalize(#strings.toLowerCase(ingredient))}">Ham</span>
+        </div>
+        <form>
+</div>
+</body>
+</html>
