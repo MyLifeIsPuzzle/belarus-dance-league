@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dancing Halls</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{header::main}"></div>
+
+<div class="container">
+    <div>
+        <h2 align="center">Dance halls:</h2>
+        <table class="table">
+            <th:block th:each="danceHall : ${dancingHalls}">
+                <tr align="center">
+                    <td>
+                        <a th:href="@{'/danceHall/' + ${danceHall.id}}" th:text="${danceHall.name}"></a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+
+    <div>
+        <th:block th:if="${not #lists.isEmpty(inactiveDancingHalls)}">
+            <h2 align="center">Inactive dance halls:</h2>
+            <table class="table">
+                <th:block th:each="danceHall : ${inactiveDancingHalls}">
+                    <tr align="center">
+                        <td>
+                            <a th:href="@{'/danceHall/' + ${danceHall.id}}" th:text="${danceHall.name}"></a>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+        </th:block>
+    </div>
+</div>
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</body>
+</html>

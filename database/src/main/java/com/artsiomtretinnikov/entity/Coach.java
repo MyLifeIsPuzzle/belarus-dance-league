@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -29,7 +30,7 @@ public class Coach extends BaseHumanInfoEntity {
     @Column(name = "info")
     private String info;
 
-    @OneToMany(mappedBy = "coach")
+    @OneToMany(mappedBy = "coach", fetch = FetchType.EAGER)
     private Set<DanceClass> danceClasses = new HashSet<>();
 
     @OneToOne(mappedBy = "coach")

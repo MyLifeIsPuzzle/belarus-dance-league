@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -30,16 +31,16 @@ public class DanceGroup extends BaseEntity<Long> {
     @JoinColumn(name = "club_id")
     private Club club;
 
-    @ManyToMany(mappedBy = "danceGroups")
+    @ManyToMany(mappedBy = "danceGroups", fetch = FetchType.EAGER)
     private Set<Dancer> dancers = new HashSet<>();
 
     @OneToMany(mappedBy = "id.danceGroup")
     private Set<DancerDanceGroup> dancerDanceGroups;
 
-    @OneToMany(mappedBy = "danceGroup")
+    @OneToMany(mappedBy = "danceGroup", fetch = FetchType.EAGER)
     private Set<DanceClass> danceClasses = new HashSet<>();
 
-    @OneToMany(mappedBy = "danceGroup")
+    @OneToMany(mappedBy = "danceGroup", fetch = FetchType.EAGER)
     private Set<Request> requests = new HashSet<>();
 
     public DanceGroup(String name, Club club) {

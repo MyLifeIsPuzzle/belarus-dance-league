@@ -1,19 +1,143 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+    <title>Persons</title>
 </head>
 <body>
+<div th:insert="~{header::main}"></div>
+
 <div class="container">
-    <form th:action="@{/rating}" method="get" th:text="#{}">
-        <div th:each="style : ${styles}">
-            <input clazz="checkbox"
-                   th:value="${ingredient}"
-                   th:field="*{ingredients}">
-            <span th:text="${#strings.capitalize(#strings.toLowerCase(ingredient))}">Ham</span>
+    <div class="row" align="center">
+        <h1>Ratings</h1>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-1">
+            <select class="form-control pagination" id="pageSizeSelect">
+                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+                        th:selected="${pageSize} == ${selectedPageSize}"></option>
+            </select>
         </div>
-        <form>
+
+        <div class="form-group col-md-1">
+            <select class="form-control pagination" id="styleSelect">
+                <option value=""> --</option>
+                <option th:each="style : ${styles}" th:text="${style}" th:value="${style}"
+                        th:selected="${style} == ${selectedStyle}"></option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-1">
+            <select class="form-control pagination" id="ageCategorySelect">
+                <option value=""> --</option>
+                <option th:each="ageCategory : ${ageCategories}" th:text="${ageCategory}" th:value="${ageCategory}"
+                        th:selected="${ageCategory} == ${selectedAgeCategory}"></option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-1">
+            <select class="form-control pagination" id="leagueSelect">
+                <option value=""> --</option>
+                <option th:each="league : ${leagues}" th:text="${league}" th:value="${league}"
+                        th:selected="${league} == ${selectedLeague}"></option>
+            </select>
+        </div><br>
+
+        <div class="col-md-4 mb-3">
+                <input type="text" class="form-control" id="surnameTyped" placeholder="Surname"
+                     name="surnameParam"  th:value="${inputtedSurname}">
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>Name and surname</th>
+                <th>Style</th>
+                <th>Age category</th>
+                <th>League</th>
+                <th>Value</th>
+            </tr>
+            <tr th:each="rating : ${ratings}">
+                <td th:text="${rating.dancer.name} + ' ' + ${rating.dancer.secondName}"></td>
+                <td th:text="${rating.style.getName()}"></td>
+                <td th:text="${rating.dancer.getAgeCategory().getName()}"></td>
+                <td th:text="${rating.dancer.getLeague().getName()}"></td>
+                <td th:text="${rating.value}"></td>
+            </tr>
+        </table>
+    </div>
+    <div th:if="${ratings.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+        <ul class="pagination">
+            <li th:class="${ratings.number == 0} ? disabled">
+                <a class="pageLink" th:href="@{/rating/(pageSize=${selectedPageSize}, page=1,
+                    style=${selectedStyle},ageCategory=${selectedAgeCategory},league=${selectedLeague},
+                    surname=${inputtedSurname})}">&laquo;</a>
+            </li>
+
+            <li th:class="${ratings.number == 0} ? disabled">
+                <a class="pageLink" th:href="@{/rating/(pageSize=${selectedPageSize}, page=${ratings.number},
+                    style=${selectedStyle},ageCategory=${selectedAgeCategory},league=${selectedLeague},
+                    surname=${inputtedSurname})}">&larr;</a>
+            </li>
+
+            <li th:class="${ratings.number == (page - 1)} ? 'active pointer-disabled'"
+                th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                <a class="pageLink" th:href="@{/rating/(pageSize=${selectedPageSize}, page=${page},
+                    style=${selectedStyle},ageCategory=${selectedAgeCategory},league=${selectedLeague},
+                    surname=${inputtedSurname})}"
+                   th:text="${page}"></a>
+            </li>
+
+            <li th:class="${ratings.number + 1 == ratings.totalPages} ? disabled">
+                <a class="pageLink"
+                   th:href="@{/rating/(pageSize=${selectedPageSize}, page=${ratings.number + 2},
+                       style=${selectedStyle},ageCategory=${selectedAgeCategory},league=${selectedLeague},
+                    surname=${inputtedSurname})}">&rarr;</a>
+            </li>
+
+            <li th:class="${ratings.number + 1 == ratings.totalPages} ? disabled">
+                <a class="pageLink"
+                   th:href="@{/rating/(pageSize=${selectedPageSize}, page=${ratings.totalPages},
+                       style=${selectedStyle},ageCategory=${selectedAgeCategory},league=${selectedLeague},
+                    surname=${inputtedSurname})}">&raquo;</a>
+            </li>
+        </ul>
+    </div>
 </div>
+</div>
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+<script>
+    var ageCategoryVal = document.getElementById('ageCategorySelect').value;
+    var styleVal = document.getElementById('styleSelect').value;
+    var leagueVal = document.getElementById('leagueSelect').value;
+    var pageSizeVal = document.getElementById('pageSizeSelect').value;
+    var surnameVal = document.getElementById('surnameTyped').value;
+    window.onload = function () {
+        document.getElementById('ageCategorySelect').onchange = function () {
+            window.location.replace("/rating/?pageSize=" + pageSizeVal + "&page=1&style="
+                + styleVal + "&ageCategory=" + this.value + "&league=" + leagueVal + "&surname=" + surnameVal);
+        };
+
+        document.getElementById('pageSizeSelect').onchange = function () {
+            window.location.replace("/rating/?pageSize=" + this.value + "&page=1&style="
+                + styleVal + "&ageCategory=" + ageCategoryVal + "&league=" + leagueVal + "&surname=" + surnameVal);
+        };
+
+        document.getElementById('leagueSelect').onchange = function () {
+            window.location.replace("/rating/?pageSize=" + pageSizeVal + "&page=1&style="
+                + styleVal + "&ageCategory=" + ageCategoryVal + "&league=" + this.value + "&surname=" + surnameVal);
+        };
+
+        document.getElementById('styleSelect').onchange = function () {
+            window.location.replace("/rating/?pageSize=" + pageSizeVal + "&page=1&style="
+                + this.value + "&ageCategory=" + ageCategoryVal + "&league=" + leagueVal + "&surname=" + surnameVal);
+        };
+
+        document.getElementById('surnameTyped').onchange = function () {
+            window.location.replace("/rating/?pageSize=" + pageSizeVal + "&page=1&style="
+                + styleVal + "&ageCategory=" + ageCategoryVal + "&league=" + leagueVal + "&surname=" + this.value);
+        };
+    };
+</script>
 </body>
 </html>

@@ -7,11 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ClubRepository extends CrudRepository<Club, Long> {
-
-    List<Club> findAllByActiveTrue();
-
-    List<Club> findAllByActiveFalse();
+public interface ClubRepository extends CrudRepository<Club, Long>, ActiveRepository<Club> {
 
     List<Club> findAllByNameContains(String name);
 }

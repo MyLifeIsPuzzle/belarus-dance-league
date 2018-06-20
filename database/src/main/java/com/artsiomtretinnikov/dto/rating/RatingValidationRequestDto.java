@@ -1,4 +1,4 @@
-package com.artsiomtretinnikov.dto;
+package com.artsiomtretinnikov.dto.rating;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,11 +13,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class ClubForViewDto {
+public class RatingValidationRequestDto {
 
-    private Long id;
-
-    private String name;
-
-    private String info;
+    private String ageCategory = "";
+    private String style = "";
+    private String league = "";
+    private String surname = "";
 }

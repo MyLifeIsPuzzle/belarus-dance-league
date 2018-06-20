@@ -1,7 +1,6 @@
 package com.artsiomtretinnikov.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.GenericTypeResolver;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -21,14 +20,12 @@ public class ActiveRepositoryImpl<T> implements ActiveRepository<T> {
     }
 
     @Override
-    public List<T> findAllByActive(Class<?> clazz, boolean active) {
-        Class<?> aClass = GenericTypeResolver.resolveTypeArgument(clazz, ActiveRepositoryImpl.class);
+    public List<T> findAllByActive(Class<T> clazz, boolean active) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<?> query = cb.createQuery(aClass);
+        CriteriaQuery<T> query = cb.createQuery(clazz);
+        Root<T> root = query.from(clazz);
+        query.select(root).where(cb.equal(root.get("active"), active));
 
-        Root<?> root = criteria.from(aClass);
-        criteria.select(root).where(cb.equal(root.get("active"), active));
-
-        return entityManager.createQuery(criteria).getResultList();
+        return entityManager.createQuery(query).getResultList();
     }
 }

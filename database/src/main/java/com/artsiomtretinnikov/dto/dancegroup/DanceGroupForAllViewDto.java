@@ -1,6 +1,5 @@
-package com.artsiomtretinnikov.dto;
+package com.artsiomtretinnikov.dto.dancegroup;
 
-import com.artsiomtretinnikov.entity.Dancer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,13 +13,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class RatingDto {
+public class DanceGroupForAllViewDto {
 
     private Long id;
-
-    private Dancer dancer;
-
-    private int value;
-
-    private String style;
+    private String name;
+    private boolean active;
 }

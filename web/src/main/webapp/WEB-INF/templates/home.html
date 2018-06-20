@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Home page</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/resources/static/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-Home page
-<div th:if="${ #authorization.expression('isAuthenticated()')}">
+<div th:insert="~{header::main}"></div>
+
+<h1 align="center">WELCOME BACK</h1>
+<!--<div th:if="${ #authorization.expression('isAuthenticated()')}">
     <form th:action="@{/logout}" method="post">
         <input type="submit" th:value="Logout"/>
     </form>
 </div>
 <div th:if="${ #authorization.expression('hasRole(''Coach'')')}">
 Hello coach!
-</div>
+</div>-->
 </body>
 </html>

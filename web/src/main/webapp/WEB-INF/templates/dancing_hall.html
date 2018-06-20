@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dancing hall</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{header::main}"></div>
+
+<div class="container">
+    <div>
+        <h2 align="center">Name:</h2>
+        <p align="center" th:text="${dancingHall.name}"></p>
+        <h2 align="center">City:</h2>
+        <p align="center" th:text="${dancingHall.city}"></p>
+        <h2 align="center">Street:</h2>
+        <p align="center" th:text="${dancingHall.street}"></p>
+        <h2 align="center">Hall:</h2>
+        <p align="center" th:text="${dancingHall.hall}"></p>
+    </div>
+
+    <div>
+        <h2 align="center">Schedule:</h2>
+        <table class="table">
+            <tr>
+                <th>Group name</th>
+                <th>Coach</th>
+                <th>Day of week</th>
+                <th>Time</th>
+                <th>Style</th>
+            </tr>
+            <th:block th:each="danceClass : ${dancingHall.danceClasses}">
+                <tr>
+                    <td>
+                        <a th:href="@{'/danceGroup/' + ${danceClass.group.id}}" th:text="${danceClass.group.name}"></a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/coach/' + ${danceClass.coach.id}}"
+                           th:text="${danceClass.coach.name} + ' ' +${danceClass.coach.secondName}"></a>
+                    </td>
+                    <td th:text="${danceClass.dayOfWeek}"></td>
+                    <td th:text="${danceClass.time}"></td>
+                    <td th:text="${danceClass.style}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</div>
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</body>
+</html>

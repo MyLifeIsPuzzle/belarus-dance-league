@@ -7,11 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DanceClassRepository extends CrudRepository<DanceClass, Long> {
-
-    List<DanceClass> findAllByActiveTrue();
-
-    List<DanceClass> findAllByActiveFalse();
+public interface DanceClassRepository extends CrudRepository<DanceClass, Long>, ActiveRepository<DanceClass> {
 
     List<DanceClass> findAllByCoachId(Long id);
 

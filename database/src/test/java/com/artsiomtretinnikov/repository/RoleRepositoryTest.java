@@ -90,7 +90,7 @@ public class RoleRepositoryTest {
 
     @Test
     public void findAllActiveTest() {
-        List<Role> active = roleRepository.findAllByActiveTrue();
+        List<Role> active = roleRepository.findAllByActive(Role.class, true);
 
         assertThat(active, hasSize(2));
 
@@ -98,7 +98,7 @@ public class RoleRepositoryTest {
 
     @Test
     public void findAllInactiveTest() {
-        List<Role> active = roleRepository.findAllByActiveFalse();
+        List<Role> active = roleRepository.findAllByActive(Role.class, false);
 
         assertThat(active, hasSize(1));
 

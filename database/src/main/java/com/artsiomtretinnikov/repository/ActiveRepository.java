@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface ActiveRepository<T> {
 
-    List<T> findAllByActive(Class<?> type, boolean active);
+    List<T> findAllByActive(Class<T> type, boolean active);
 }
