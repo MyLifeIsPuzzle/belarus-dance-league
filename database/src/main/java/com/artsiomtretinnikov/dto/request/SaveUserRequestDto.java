@@ -1,7 +1,5 @@
-package com.artsiomtretinnikov.dto.dancer;
+package com.artsiomtretinnikov.dto.request;
 
-import com.artsiomtretinnikov.dto.dancegroup.DanceGroupForAllViewDto;
-import com.artsiomtretinnikov.dto.rating.RatingDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,24 +7,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Builder
-public class DancerForSingleViewDto {
+public class SaveUserRequestDto {
 
-    private Long id;
     private String name;
     private String secondName;
     private String dateOfBirth;
-    private Set<DanceGroupForAllViewDto> danceGroups;
-    private Set<RatingDto> ratings;
+    private Long requestId;
+    private Long danceGroupId;
     private String phoneNumber;
     private String ageCategory;
     private String league;
-    private boolean active;
 }

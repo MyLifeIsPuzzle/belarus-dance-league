@@ -15,6 +15,7 @@ public class UserDetailsConverter {
                 .username(account.getEmail())
                 .password(account.getPassword())
                 .authorities(new SimpleGrantedAuthority(account.getRole().getName()))
+                .roles(account.getRole().getName())
                 .build();
     }
 }

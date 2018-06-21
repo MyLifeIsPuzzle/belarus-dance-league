@@ -10,4 +10,9 @@ public class LoginController {
     public String showLoginPage() {
         return "login";
     }
+
+    @GetMapping("/logout")
+    public String showLogoutPate() {
+        return "logout";
+    }
 }

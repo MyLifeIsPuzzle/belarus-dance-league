@@ -17,7 +17,6 @@ import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -48,16 +47,15 @@ public class RoleRepositoryTest {
 
     @Test
     public void deleteTest() {
-        Optional<Role> role = roleRepository.findById(3L);
+        Optional<Role> role = roleRepository.findByName("User");
         assertTrue(role.isPresent());
         roleRepository.delete(role.get());
-        assertFalse(roleRepository.findById(3L).isPresent());
-
+        assertFalse(roleRepository.findByName("User").isPresent());
     }
 
     @Test
     public void updateTest() {
-        Optional<Role> roleOpt = roleRepository.findById(3L);
+        Optional<Role> roleOpt = roleRepository.findByName("User");
         if (roleOpt.isPresent()) {
             Role role = roleOpt.get();
 
@@ -66,7 +64,7 @@ public class RoleRepositoryTest {
             role.setName("Changed name");
             roleRepository.save(role);
 
-            assertEquals(roleRepository.findById(3L).get().getName(), "Changed name");
+            assertFalse(roleRepository.findByName("User").isPresent());
         } else {
             fail();
         }
@@ -78,21 +76,14 @@ public class RoleRepositoryTest {
         Iterable<Role> all = roleRepository.findAll();
         all.forEach(result::add);
 
-        assertThat(result, hasSize(3));
-    }
-
-    @Test
-    public void findByIdTest() {
-        Optional<Role> result = roleRepository.findById(3L);
-
-        assertTrue(result.isPresent());
+        assertThat(result, hasSize(4));
     }
 
     @Test
     public void findAllActiveTest() {
         List<Role> active = roleRepository.findAllByActive(Role.class, true);
 
-        assertThat(active, hasSize(2));
+        assertThat(active, hasSize(3));
 
     }
 

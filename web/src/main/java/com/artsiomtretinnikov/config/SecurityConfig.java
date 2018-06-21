@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -25,24 +27,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.addFilterBefore(filterLoad(http), CsrfFilter.class)
                 .authorizeRequests()
-                    .antMatchers("/admin")
-                        .hasAnyAuthority("Admin")
-/*                    .antMatchers("/coach")
-                        .hasAnyAuthority("Coach", "Admin")*/
-                    .anyRequest()
-                        .permitAll()
-                .and()
+                    .antMatchers("/admin/**").hasRole("Admin")
+                    .antMatchers("/coach/**").hasRole("Coach")
+                 .and()
                     .formLogin()
+                         .loginPage("/login")
+                                .defaultSuccessUrl("/home")
+                                     .permitAll()
                 .and()
+                    .exceptionHandling()
+                        .accessDeniedPage("/error")
+                 .and()
                     .httpBasic()
-                .and()
+                 .and()
                     .logout()
-                        .logoutUrl("/logout")
                             .logoutSuccessUrl("/home");
         http.userDetailsService(userDetailsService);
-
     }
 
     @Bean
@@ -55,7 +57,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
+
         return authProvider;
+    }
+
+    private CharacterEncodingFilter filterLoad(HttpSecurity http) {
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
+
+        return filter;
     }
 
     @Override

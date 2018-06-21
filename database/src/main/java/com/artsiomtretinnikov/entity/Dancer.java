@@ -17,9 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -52,7 +50,7 @@ public class Dancer extends BaseHumanInfoEntity {
     private Set<DancerDanceGroup> dancerDanceGroups;
 
     @OneToMany(mappedBy = "dancer", fetch = FetchType.EAGER)
-    private List<Rating> ratings = new ArrayList<>();
+    private Set<Rating> ratings = new HashSet<>();
 
     @Column(name = "phone_number")
     private String phoneNumber;

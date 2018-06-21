@@ -3,8 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin page</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
 </head>
 <body>
-    Admin page
+<div th:insert="~{header::main}"></div>
+<h2 align="center">Admin page</h2>
+
+<form th:action="@{/admin/coach/save}" method="post" th:object="${coachAndAccInfo}" th:align="center">
+    <p>
+        <label for="name"> Name:
+            <input class="form-control" type="text" id="name" th:field="*{name}"/>
+        </label>
+    </p>
+    <p>
+        <label for="surname"> Surname:
+            <input class="form-control" type="text" id="surname" th:field="*{secondName}"/>
+        </label>
+    </p>
+    <p>
+        <label for="info"> Info:
+            <input class="form-control" type="text" id="info" th:field="*{info}"/>
+        </label>
+    </p>
+    <p>
+        <label for="email"> Email:
+            <input class="form-control" type="text" id="email" th:field="*{email}"/>
+        </label>
+    </p>
+    <p>
+        <label for="password"> Password:
+            <input class="form-control" type="password" id="password" th:field="*{password}"/>
+        </label>
+    </p>
+    <input type="submit" class="btn btn-primary" value="Save coach">
+</form>
+
 </body>
 </html>

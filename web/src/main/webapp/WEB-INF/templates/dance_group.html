@@ -9,40 +9,41 @@
 <div th:insert="~{header::main}"></div>
 
 <div class="container">
-        <h3 align="center">Group name:</h3>
-        <p align="center" th:text="${danceGroup.name}"></p>
-        <h3 align="center">Group belong to club:</h3>
-        <p align="center">
-            <a th:href="@{'/club/' + ${danceGroup.club.id}}" th:text="${danceGroup.club.name}"></a>
-        </p>
-        <h3 align="center">Schedule:</h3>
-        <table class="table">
+    <h2 align="center">Group name:</h2>
+    <p align="center" th:text="${danceGroup.name}"></p>
+    <h2 align="center">Group belong to club:</h2>
+    <p align="center">
+        <a th:href="@{'/club/' + ${danceGroup.club.id}}" th:text="${danceGroup.club.name}"></a>
+    </p>
+    <h2 align="center">Schedule:</h2>
+    <table class="table">
+        <tr>
+            <th>Group name</th>
+            <th>Dance hall</th>
+            <th>Day of week</th>
+            <th>Time</th>
+            <th>Style</th>
+        </tr>
+        <th:block th:each="danceClass : ${danceGroup.danceClasses}">
             <tr>
-                <th>Group name</th>
-                <th>Dance hall</th>
-                <th>Day of week</th>
-                <th>Time</th>
-                <th>Style</th>
+                <td>
+                    <a th:href="@{'/danceHall/' + ${danceClass.danceHall.id}}"
+                       th:text="${danceClass.danceHall.name}"></a>
+                </td>
+                <td>
+                    <a th:href="@{'/coachView/' + ${danceClass.coach.id}}"
+                       th:text="${danceClass.coach.name} + ' ' +${danceClass.coach.secondName}"></a>
+                </td>
+                <td th:text="${danceClass.dayOfWeek}"></td>
+                <td th:text="${danceClass.time}"></td>
+                <td th:text="${danceClass.style}"></td>
             </tr>
-            <th:block th:each="danceClass : ${danceGroup.danceClasses}">
-                <tr>
-                    <td>
-                        <a th:href="@{'/danceHall/' + ${danceClass.danceHall.id}}"
-                           th:text="${danceClass.danceHall.name}"></a>
-                    </td>
-                    <td>
-                        <a th:href="@{'/coach/' + ${danceClass.coach.id}}"
-                           th:text="${danceClass.coach.name} + ' ' +${danceClass.coach.secondName}"></a>
-                    </td>
-                    <td th:text="${danceClass.dayOfWeek}"></td>
-                    <td th:text="${danceClass.time}"></td>
-                    <td th:text="${danceClass.style}"></td>
-                </tr>
-            </th:block>
-        </table>
+        </th:block>
+    </table>
 
+    <a th:if="${ #authorization.expression('hasRole(''Admin'')')}">
         <th:block th:if="${not #lists.isEmpty(inactiveDanceClasses)}">
-            <h3 align="center">Inactive dance classes:</h3>
+            <h2 align="center">Inactive dance classes:</h2>
             <table class="table">
                 <tr>
                     <th>Group name</th>
@@ -68,8 +69,36 @@
                 </th:block>
             </table>
         </th:block>
+    </a>
+
+    <h2 align="center">Leave request:</h2>
+    <form th:action="@{/request}" method="post" th:object="${requestModel}" th:align="center">
+        <p>
+            <label for="name"> Name:
+                <input class="form-control" type="text" id="name" th:field="*{name}"/>
+            </label>
+        </p>
+        <p>
+            <label for="surname"> Surname:
+                <input class="form-control" type="text" id="surname" th:field="*{secondName}"/>
+            </label>
+        </p>
+        <p>
+            <label for="info"> Date of birth:
+                <input class="form-control" type="date" id="info" th:field="*{dateOfBirth}"/>
+            </label>
+        </p>
+        <p>
+            <label for="email"> Phone number:
+                <input class="form-control" type="text" id="email" th:field="*{phoneNumber}"/>
+            </label>
+        </p>
+        <p>
+            <input class="form-control" type="hidden" th:attr="name='danceGroupId'"
+                   th:value="${danceGroup.id}"/>
+        </p>
+        <input type="submit" class="btn btn-primary" value="Save request">
+    </form>
 </div>
-<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </body>
 </html>

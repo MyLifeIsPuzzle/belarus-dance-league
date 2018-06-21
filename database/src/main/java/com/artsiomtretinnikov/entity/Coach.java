@@ -60,4 +60,9 @@ public class Coach extends BaseHumanInfoEntity {
         this.info = info;
         this.clubs = clubs;
     }
+
+    public Coach(String name, String secondName, String info) {
+        super(name, secondName);
+        this.info = info;
+    }
 }

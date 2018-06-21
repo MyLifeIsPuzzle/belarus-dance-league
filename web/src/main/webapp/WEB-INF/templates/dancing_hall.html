@@ -36,7 +36,7 @@
                         <a th:href="@{'/danceGroup/' + ${danceClass.group.id}}" th:text="${danceClass.group.name}"></a>
                     </td>
                     <td>
-                        <a th:href="@{'/coach/' + ${danceClass.coach.id}}"
+                        <a th:href="@{'/coachView/' + ${danceClass.coach.id}}"
                            th:text="${danceClass.coach.name} + ' ' +${danceClass.coach.secondName}"></a>
                     </td>
                     <td th:text="${danceClass.dayOfWeek}"></td>
@@ -47,7 +47,5 @@
         </table>
     </div>
 </div>
-<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </body>
 </html>

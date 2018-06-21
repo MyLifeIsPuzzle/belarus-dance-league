@@ -39,16 +39,19 @@ public class DatabaseHelper {
     public void cleanDatabase() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.createQuery("delete from Rating").executeUpdate();
-        entityManager.createQuery("delete from Dancer").executeUpdate();
-        entityManager.createQuery("delete from Request").executeUpdate();
-        entityManager.createQuery("delete from Account").executeUpdate();
         entityManager.createQuery("delete from DanceClass").executeUpdate();
-        entityManager.createQuery("delete from DanceGroup").executeUpdate();
-        entityManager.createQuery("delete from DancingHall").executeUpdate();
-        entityManager.createQuery("delete from Club").executeUpdate();
-        entityManager.createQuery("delete from Coach").executeUpdate();
+        entityManager.createQuery("delete from Request").executeUpdate();
+        entityManager.createQuery("delete from Rating").executeUpdate();
+        entityManager.createQuery("delete from DancerDanceGroup").executeUpdate();
+        entityManager.createQuery("delete from ClubCoach").executeUpdate();
+        entityManager.createQuery("delete from Account").executeUpdate();
         entityManager.createQuery("delete from Role").executeUpdate();
+        entityManager.createQuery("delete from Coach").executeUpdate();
+        entityManager.createQuery("delete from DancingHall").executeUpdate();
+        entityManager.createQuery("delete from Dancer").executeUpdate();
+        entityManager.createQuery("delete from DanceGroup").executeUpdate();
+        entityManager.createQuery("delete from Coach").executeUpdate();
+        entityManager.createQuery("delete from Club").executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();
     }
@@ -63,6 +66,8 @@ public class DatabaseHelper {
         entityManager.persist(coachRole);
         Role userRole = new Role(false, "User");
         entityManager.persist(userRole);
+        Role testRole = new Role(true, "Test");
+        entityManager.persist(testRole);
 
         DancingHall school = new DancingHall("School 123", new Address("Minsk", "Belskogo 12", "Great hall"));
         entityManager.persist(school);

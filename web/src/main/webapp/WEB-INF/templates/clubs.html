@@ -9,36 +9,35 @@
 <div th:insert="~{header::main}"></div>
 
 <div class="container">
-        <div class="row">
-            <h3 align="center">Clubs:</h3>
-            <table class="table">
-                <th:block th:each="singleClub : ${clubsList}">
-                    <tr align="center">
-                        <td>
-                            <a th:href="@{'/club/' + ${singleClub.id}}" th:text="${singleClub.name}"> </a>
-                        </td>
-                    </tr>
-                </th:block>
-            </table>
-        </div>
+    <div class="row">
+        <h2 align="center">Clubs:</h2>
+        <table class="table">
+            <th:block th:each="singleClub : ${clubsList}">
+                <tr align="center">
+                    <td>
+                        <a th:href="@{'/club/' + ${singleClub.id}}" th:text="${singleClub.name}"> </a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
 
+    <div th:if="${ #authorization.expression('hasRole(''Admin'')')}">
         <div class="row">
             <th:block th:if="${not #lists.isEmpty(inactiveClubsList)}">
-                <h3 align="center">Inactive clubs:</h3>
+                <h2 align="center">Inactive clubs:</h2>
                 <table class="table">
                     <th:block th:each="singleClub : ${inactiveClubsList}">
                         <tr align="center">
                             <td>
-                                <a th:text="${singleClub.name}"> </a>
+                                <p th:text="${singleClub.name}"></p>
                             </td>
                         </tr>
                     </th:block>
                 </table>
             </th:block>
         </div>
+    </div>
 </div>
-<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
-<script th:src="@{/static/js/app.js}"></script>
 </body>
 </html>

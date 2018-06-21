@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Logout</title>
     <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
 </head>
 <body>
 <div th:insert="~{header::main}"></div>
-
-<h1 align="center">
-    Access denied!
-</h1>
+<h2 align="center">Are you sure?</h2>
+<div align="center">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" class="btn btn-danger" value="Logout">
+    </form>
+</div>
 </body>
 </html>

@@ -9,20 +9,34 @@
         <a href="?language=ru_RU">Русский</a><br>
         <a href="?language=en_US">English</a>
     </div>-->
-
 <div th:fragment="main">
     <h2 align="center">
         <a href="/club">Clubs</a>
         <a> | </a>
-        <a href="/coach">Coaches</a>
+        <a href="/coachView">Coaches</a>
         <a> | </a>
         <a href="/rating">Rating</a>
         <a> | </a>
         <a href="/danceHall">Dance Halls</a>
         <a> | </a>
-        <a href="/danceGroup/email@tut.by/groups">My groups</a>
-        <a> | </a>
-        <a href="/home">Home</a></h2>
+        <a th:if="${ #authorization.expression('hasRole(''Coach'')')}">
+            <a href="/coach/groups">My groups</a>
+            <a> | </a>
+        </a>
+        <a href="/home">Home</a>
+        <a th:if="${ #authorization.expression('hasRole(''Admin'')')}">
+            <a> | </a>
+            <a href="/admin">Admin</a>
+        </a>
+        <a th:if="${ #authorization.expression('isAnonymous()')}">
+            <a> | </a>
+            <a href="/login">Login</a>
+        </a>
+        <a th:if="${ #authorization.expression('isAuthenticated()')}">
+            <a> | </a>
+            <a href="/logout" class="text-danger">Logout</a>
+        </a>
+    </h2>
 </div>
 </body>
 </html>

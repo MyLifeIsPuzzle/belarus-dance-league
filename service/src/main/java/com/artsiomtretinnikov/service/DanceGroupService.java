@@ -7,12 +7,15 @@ import com.artsiomtretinnikov.dto.dancegroup.DanceGroupForSingleViewDto;
 import com.artsiomtretinnikov.entity.DanceGroup;
 import com.artsiomtretinnikov.repository.DanceGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@CacheConfig(cacheNames = "danceGroup")
 public class DanceGroupService {
 
     private final DanceGroupRepository danceGroupRepository;
@@ -27,6 +30,7 @@ public class DanceGroupService {
         return danceGroup.map(ModelToDtoConverter::danceGroupModelToFullDto).orElse(null);
     }
 
+    @Cacheable
     public DanceGroupForCoachViewDto getByIdForCoach(Long danceGroupId) {
         Optional<DanceGroup> danceGroup = danceGroupRepository.findById(danceGroupId);
         return danceGroup.map(ModelToDtoConverter::danceGroupModelToFullForCoachDto).orElse(null);

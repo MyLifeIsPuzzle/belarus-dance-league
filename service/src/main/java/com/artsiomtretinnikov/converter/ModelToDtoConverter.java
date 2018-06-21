@@ -3,6 +3,7 @@ package com.artsiomtretinnikov.converter;
 import com.artsiomtretinnikov.dto.account.AccountDto;
 import com.artsiomtretinnikov.dto.club.ClubForAllViewDto;
 import com.artsiomtretinnikov.dto.club.ClubForSingleViewDto;
+import com.artsiomtretinnikov.dto.coach.CoachCreateDto;
 import com.artsiomtretinnikov.dto.coach.CoachForAllViewDto;
 import com.artsiomtretinnikov.dto.coach.CoachForSingleViewDto;
 import com.artsiomtretinnikov.dto.danceclass.DanceClassDto;
@@ -14,6 +15,7 @@ import com.artsiomtretinnikov.dto.dancehall.DanceHallForSingleViewDto;
 import com.artsiomtretinnikov.dto.dancer.DancerForAllViewDto;
 import com.artsiomtretinnikov.dto.dancer.DancerForSingleViewDto;
 import com.artsiomtretinnikov.dto.rating.RatingDto;
+import com.artsiomtretinnikov.dto.request.CreateRequestDto;
 import com.artsiomtretinnikov.dto.request.RequestDto;
 import com.artsiomtretinnikov.dto.role.RoleDto;
 import com.artsiomtretinnikov.entity.Account;
@@ -27,11 +29,17 @@ import com.artsiomtretinnikov.entity.Rating;
 import com.artsiomtretinnikov.entity.Request;
 import com.artsiomtretinnikov.entity.Role;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class ModelToDtoConverter {
+
+    public static Account accountCreateDtoToModel(CoachCreateDto coach) {
+        return new Account(coach.getEmail(), coach.getPassword());
+    }
 
     public static AccountDto accountModelToDto(Account account) {
         return AccountDto.builder()
@@ -67,6 +75,10 @@ public final class ModelToDtoConverter {
 
     public static List<ClubForAllViewDto> clubModelListToSimpleDtoList(List<Club> clubs) {
         return clubs.stream().map(ModelToDtoConverter::clubModelToSimpleDto).collect(Collectors.toList());
+    }
+
+    public static Coach coachCreateDtoToCoachModel(CoachCreateDto coachCreateDto) {
+        return new Coach(coachCreateDto.getName(), coachCreateDto.getSecondName(), coachCreateDto.getInfo());
     }
 
     public static CoachForAllViewDto coachModelToSimpleDto(Coach coach) {
@@ -231,8 +243,18 @@ public final class ModelToDtoConverter {
                 .build();
     }
 
-    public static List<RatingDto> ratingModelListToDtoList(List<Rating> ratings) {
-        return ratings.stream().map(ModelToDtoConverter::ratingModelToDto).collect(Collectors.toList());
+    public static Set<RatingDto> ratingModelListToDtoList(Set<Rating> ratings) {
+        return ratings.stream().map(ModelToDtoConverter::ratingModelToDto).collect(Collectors.toSet());
+    }
+
+    public static Request requestCreateDtoToModel(CreateRequestDto requestDto) {
+        Request request = new Request();
+        request.setName(requestDto.getName());
+        request.setSecondName(requestDto.getSecondName());
+        request.setPhoneNumber(requestDto.getPhoneNumber());
+        request.setDateOfBirth(LocalDate.parse(requestDto.getDateOfBirth(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
+        return request;
     }
 
     public static RequestDto requestModelToDto(Request request) {

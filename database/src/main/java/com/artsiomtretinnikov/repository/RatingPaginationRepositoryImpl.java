@@ -25,45 +25,6 @@ public class RatingPaginationRepositoryImpl implements RatingPaginationRepositor
         this.entityManager = entityManager;
     }
 
-
-/*    @Override
-    public Page<Rating> findAll(RatingValidationRequestDto requestDto, Pageable pageable) {
-        Set<Rating> result = new HashSet<>();
-
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Rating> query = cb.createQuery(Rating.class);
-        Root<Rating> root = query.from(Rating.class);
-        query.select(root);
-
-        List<Rating> resultList = entityManager.createQuery(query).getResultList();
-
-        if (isEmpty(requestDto.getAgeCategory()) && isEmpty(requestDto.getLeague()) && isEmpty(requestDto.getStyle())) {
-            List<Rating> paginatedResult = resultList.stream()
-                    .skip(pageable.getPageNumber() * pageable.getPageSize())
-                    .limit(pageable.getPageSize()).collect(Collectors.toList());
-
-            return new PageImpl<>(paginatedResult, pageable, resultList.size());
-
-        } else {
-            resultList.stream().filter(rating -> !isEmpty(requestDto.getStyle()) && rating.getStyle().toString().equals(requestDto.getStyle().toUpperCase()))
-                    .forEach(result::add);
-            resultList.stream().filter(rating -> !isEmpty(requestDto.getAgeCategory()) && rating.getDancer().getAgeCategory().toString().equals(requestDto.getAgeCategory().toUpperCase()))
-                    .forEach(result::add);
-            resultList.stream().filter(rating -> !isEmpty(requestDto.getLeague()) && rating.getDancer().getLeague().toString().equals(requestDto.getLeague().toUpperCase()))
-                    .forEach(result::add);
-
-            List<Rating> sortedResult = new ArrayList<>(result);
-
-            List<Rating> paginatedResult = sortedResult.stream()
-                    .skip(pageable.getPageNumber() * pageable.getPageSize())
-                    .limit(pageable.getPageSize()).collect(Collectors.toList());
-
-            return new PageImpl<>(paginatedResult, pageable, sortedResult.size());
-        }
-
-
-    }*/
-
     @Override
     @SuppressWarnings("unchecked")
     public Page<Rating> findAll(RatingValidationRequestDto requestDto, Pageable pageable) {
