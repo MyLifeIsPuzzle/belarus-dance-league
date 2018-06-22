@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,18 +28,6 @@ public class DancerController {
         model.addAttribute("requestDto" ,new RequestDto());
         String referer = request.getHeader("Referer");
 
-        return "redirect:"+ referer;
-    }
-
-    @PostMapping("/coach/dancer/activate_in_group")
-    public String activateInGroup(@RequestParam("dancerId") Long dancerId, @RequestParam("groupId") Long groupId, @RequestHeader("Referer") String referer) {
-        dancerService.isActive(dancerId, groupId, true);
-        return "redirect:"+ referer;
-    }
-
-    @PostMapping("/coach/dancer/deactivate_in_group")
-    public String deactivateInGroup(@RequestParam("dancerId") Long dancerId, @RequestParam("groupId") Long groupId, @RequestHeader("Referer") String referer) {
-        dancerService.isActive(dancerId, groupId, false);
         return "redirect:"+ referer;
     }
 }

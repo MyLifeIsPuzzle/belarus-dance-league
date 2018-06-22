@@ -1,8 +1,8 @@
 package com.artsiomtretinnikov.aspect;
 
 import org.apache.log4j.Logger;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ public class ClubAspect {
     @Pointcut("execution(public * com.artsiomtretinnikov.service.ClubService.*(..))*")
     public void clubService() {}
 
-    @Before("clubService()")
+    @AfterReturning("clubService()")
     public void afterMethodInvoke() {
         CLUB_LOGGER.info("Club's service method was invoked");
     }

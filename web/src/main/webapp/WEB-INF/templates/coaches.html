@@ -10,7 +10,7 @@
 
 <div class="container">
     <div>
-        <h2 align="center">Coaches:</h2>
+        <h2 align="center" th:text="#{coach}">Coaches:</h2>
         <table class="table">
             <th:block th:each="aCoach : ${coachesList}">
                 <tr align="center">
@@ -23,10 +23,10 @@
         </table>
     </div>
 
-    <a th:if="${ #authorization.expression('hasRole(''Admin'')')}">
+    <div th:if="${ #authorization.expression('hasRole(''Admin'')')}">
         <div>
             <th:block th:if="${not #lists.isEmpty(inactiveCoachesList)}">
-                <h2 align="center">Inactive coaches:</h2>
+                <h2 align="center" th:text="#{inactivecoaches}">Inactive coaches:</h2>
                 <table class="table">
                     <th:block th:each="aCoach : ${inactiveCoachesList}">
                         <tr align="center">
@@ -38,7 +38,7 @@
                 </table>
             </th:block>
         </div>
-    </a>
+    </div>
 </div>
 </body>
 </html>

@@ -7,8 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DancerRepository extends CrudRepository<Dancer, Long>, ActiveRepository<Dancer>,
-        DancerInGroupActivationRepository {
+public interface DancerRepository extends CrudRepository<Dancer, Long>, ActiveRepository<Dancer> {
 
     List<Dancer> findAllBySecondNameContainsIgnoreCase(String secondName);
 }

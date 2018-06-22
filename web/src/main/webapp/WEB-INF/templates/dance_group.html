@@ -75,17 +75,17 @@
     <form th:action="@{/request}" method="post" th:object="${requestModel}" th:align="center">
         <p>
             <label for="name"> Name:
-                <input class="form-control" type="text" id="name" th:field="*{name}"/>
+                <input class="form-control" type="text" id="name" th:field="*{name}" required minlength="2" maxlength="30"/>
             </label>
         </p>
         <p>
             <label for="surname"> Surname:
-                <input class="form-control" type="text" id="surname" th:field="*{secondName}"/>
+                <input class="form-control" type="text" id="surname" th:field="*{secondName}" required min="2" maxlength="35"/>
             </label>
         </p>
         <p>
             <label for="info"> Date of birth:
-                <input class="form-control" type="date" id="info" th:field="*{dateOfBirth}"/>
+                <input class="form-control" type="date" id="info" th:field="*{dateOfBirth}" required/>
             </label>
         </p>
         <p>

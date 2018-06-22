@@ -6,6 +6,7 @@ import com.artsiomtretinnikov.dto.club.ClubForAllViewDto;
 import com.artsiomtretinnikov.dto.danceclass.DanceClassDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @ToString
 @Builder
 public class DanceGroupForSingleViewDto {

@@ -33,4 +33,9 @@ public class AccountRepositoryTest {
     public void findAllTest() {
             assertNotNull(accountRepository.findAll());
     }
+
+    @Test
+    public void findByEmailTest() {
+        assertNotNull(accountRepository.findByEmail("email@tut.com").orElse(null));
+    }
 }

@@ -50,8 +50,4 @@ public class DancerService {
 
         requestRepository.deleteById(createRequestDto.getRequestId());
     }
-
-    public void isActive(Long dancerId, Long groupId, boolean active) {
-        dancerRepository.isActive(dancerId, groupId, active);
-    }
 }

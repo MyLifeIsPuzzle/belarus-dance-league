@@ -48,22 +48,22 @@ public class RatingPaginationRepositoryImpl implements RatingPaginationRepositor
         return new PageImpl<>(resultList, pageable, ((BigInteger) capacity).intValue());
     }
 
-    private void addInitialQueryParams(StringBuilder stringBuilder) {
+    protected void addInitialQueryParams(StringBuilder stringBuilder) {
         stringBuilder.append("SELECT * FROM dance_league.rating AS r INNER JOIN dance_league.dancer d ON r.dancer_id = d.dancer_id INNER JOIN dance_league.human_base_info bi ON d.dancer_id = bi.id ");
     }
 
-    private void addInitialQueryParamsForCapacity(StringBuilder stringBuilder) {
-        stringBuilder.append("SELECT count(r) FROM dance_league.rating AS r INNER JOIN dance_league.dancer d ON r.dancer_id = d.dancer_id INNER JOIN dance_league.human_base_info bi ON d.dancer_id = bi.id ");
+    protected void addInitialQueryParamsForCapacity(StringBuilder stringBuilder) {
+        stringBuilder.append("SELECT count(*) FROM dance_league.rating AS r INNER JOIN dance_league.dancer d ON r.dancer_id = d.dancer_id INNER JOIN dance_league.human_base_info bi ON d.dancer_id = bi.id ");
     }
 
-    private void addPaginationParams(Pageable pageable, StringBuilder stringBuilder) {
+    protected void addPaginationParams(Pageable pageable, StringBuilder stringBuilder) {
         stringBuilder.append("ORDER BY r.value DESC LIMIT ")
                 .append(pageable.getPageSize())
                 .append(" OFFSET ")
                 .append(pageable.getPageNumber() * pageable.getPageSize());
     }
 
-    private void addSortingParams(RatingValidationRequestDto requestDto, StringBuilder stringBuilder) {
+    protected void addSortingParams(RatingValidationRequestDto requestDto, StringBuilder stringBuilder) {
         if (!isEmpty(requestDto.getAgeCategory()) || !isEmpty(requestDto.getLeague()) || !isEmpty(requestDto.getStyle()) || !isEmpty(requestDto.getSurname())) {
             stringBuilder.append("WHERE ");
             if (!isEmpty(requestDto.getStyle())) {

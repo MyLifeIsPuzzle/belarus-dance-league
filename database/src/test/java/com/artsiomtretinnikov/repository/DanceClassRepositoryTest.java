@@ -38,10 +38,11 @@ public class DanceClassRepositoryTest {
 
     @Test
     public void findByCoachTest() {
-        List<DanceClass> classes = danceClassRepository.findAllByCoachId(2L);
+        danceClassRepository.findAll();
+        List<DanceClass> classes = danceClassRepository.findAllByCoachId(16L);
         assertThat(classes, hasSize(2));
         List<Long> classesId = classes.stream().map(BaseEntity::getId).collect(toList());
-        assertThat(classesId, contains(1L, 3L));
+        assertThat(classesId, contains(7L, 9L));
     }
 
     @Test
@@ -54,9 +55,10 @@ public class DanceClassRepositoryTest {
 
     @Test
     public void findByDancingHallTest() {
-        List<DanceClass> classes = danceClassRepository.findAllByDancingHallId(2L);
+        danceClassRepository.findAll();
+        List<DanceClass> classes = danceClassRepository.findAllByDancingHallId(4L);
         assertThat(classes, hasSize(2));
         List<Long> classesId = classes.stream().map(BaseEntity::getId).collect(toList());
-        assertThat(classesId, contains(1L, 3L));
+        assertThat(classesId, contains(4L, 6L));
     }
 }

@@ -39,7 +39,7 @@ public class Coach extends BaseHumanInfoEntity {
     @OneToMany(mappedBy = "id.coach")
     private Set<ClubCoach> clubCoaches;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "club_coach", schema = "dance_league",
             joinColumns = {@JoinColumn(name = "coach_id")},
             inverseJoinColumns = {@JoinColumn(name = "club_id")})

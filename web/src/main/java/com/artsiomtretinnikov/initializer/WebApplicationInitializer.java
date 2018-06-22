@@ -30,5 +30,4 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
     }
-
 }
