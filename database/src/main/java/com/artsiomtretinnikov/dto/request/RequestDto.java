@@ -1,6 +1,5 @@
 package com.artsiomtretinnikov.dto.request;
 
-import com.artsiomtretinnikov.dto.dancegroup.DanceGroupForAllViewDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +19,8 @@ public class RequestDto {
     private String name;
     private String secondName;
     private String dateOfBirth;
-    private DanceGroupForAllViewDto danceGroup;
+    private Long groupId;
     private String phoneNumber;
     private boolean active;
+    private Integer version;
 }

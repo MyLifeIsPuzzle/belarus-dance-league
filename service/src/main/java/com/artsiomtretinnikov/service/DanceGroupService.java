@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,7 @@ public class DanceGroupService {
     }
 
     public List<DanceGroupForAllViewDto> getByAccount(String email) {
-      return  ModelToDtoConverter.danceGroupModelListToSimpleDtoList(danceGroupRepository.findAllByAccount(email));
+      return  new ArrayList<>(ModelToDtoConverter.danceGroupModelSetToSimpleDtoSet(danceGroupRepository.findAllByAccount(email)));
     }
 
     public List<DanceGroupForAllViewDto> getAllByActive(boolean active) {

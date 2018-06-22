@@ -51,15 +51,37 @@
                             <input class="form-control" type="hidden" th:attr="name='dateOfBirth'"
                                    th:value="${request.dateOfBirth}"/>
                             <input class="form-control" type="hidden" th:attr="name='danceGroupId'"
-                                   th:value="${request.danceGroup.getId()}"/>
+                                   th:value="${request.groupId}"/>
                             <input class="form-control" type="hidden" th:attr="name='requestId'"
-                                   th:value="${request.getId()}"/>
+                                   th:value="${request.id}"/>
                         </form>
                     </td>
                     <td>
-                        <form th:action="@{/coach/request/deactivate}" method="post">
-                            <input class="form-control" type="hidden" th:attr="name='requestId'"
-                                   th:value="${request.id}"/>
+                        <form th:action="@{/coach/request/deactivate}" method="post" th:object="${requestDto}">
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='id'" th:value="${request.id}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='name'" th:value="${request.name}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='secondName'" th:value="${request.secondName}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='dateOfBirth'" th:value="${request.dateOfBirth}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='groupId'" th:value="${request.groupId}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='phoneNumber'" th:value="${request.phoneNumber}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='active'" th:value="${request.active}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='version'" th:value="${request.version}"/>
+                            </p>
                             <input type="submit" class="btn btn-danger" th:value="#{reject}">
                         </form>
                     </td>
@@ -76,6 +98,8 @@
                     <th th:text="#{namesurname}">Name and surname</th>
                     <th th:text="#{phonenumber}">Phone number</th>
                     <th th:text="#{dateofbirth}">Date of birth</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 <th:block th:each="request : ${inactiveRequests}">
                     <tr>
@@ -83,13 +107,33 @@
                         <td th:text="${request.phoneNumber}"></td>
                         <td th:text="${request.dateOfBirth}"></td>
                         <td>
-                        <td>
-                            <form th:action="@{/coach/request/activate}" method="post">
-                                <input class="form-control" type="hidden" th:attr="name='requestId'"
-                                       th:value="${request.id}"/>
+                            <form th:action="@{/coach/request/activate}" method="post" th:object="${requestDto}">
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='id'" th:value="${request.id}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='name'" th:value="${request.name}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='secondName'" th:value="${request.secondName}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='dateOfBirth'" th:value="${request.dateOfBirth}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='groupId'" th:value="${request.groupId}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='phoneNumber'" th:value="${request.phoneNumber}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='active'" th:value="${request.active}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='version'" th:value="${request.version}"/>
+                                </p>
                                 <input type="submit" class="btn btn-primary" th:value="#{activate}">
                             </form>
-                        </td>
                         </td>
                         <td>
                             <form th:action="@{/coach/request/delete}" method="post">

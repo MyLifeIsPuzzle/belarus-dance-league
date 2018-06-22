@@ -263,9 +263,10 @@ public final class ModelToDtoConverter {
                 .name(request.getName())
                 .secondName(request.getSecondName())
                 .dateOfBirth(request.getDateOfBirth().toString())
-                .danceGroup(danceGroupModelToSimpleDto(request.getDanceGroup()))
+                .groupId(request.getDanceGroup().getId())
                 .phoneNumber(request.getPhoneNumber())
                 .active(request.isActive())
+                .version(request.getVersion())
                 .build();
     }
 

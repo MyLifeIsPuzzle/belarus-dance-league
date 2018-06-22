@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertNotNull;
@@ -41,7 +41,7 @@ public class DanceGroupRepositoryTest {
 
     @Test
     public void findAllByAccountTest() {
-        List<DanceGroup> allByAccount = danceGroupRepository.findAllByAccount("email@tut.com");
+        Set<DanceGroup> allByAccount = danceGroupRepository.findAllByAccount("email@tut.com");
         assertThat(allByAccount, hasSize(1));
     }
 }

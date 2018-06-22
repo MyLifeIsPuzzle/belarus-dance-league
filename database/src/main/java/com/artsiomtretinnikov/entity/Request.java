@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -35,6 +36,10 @@ public class Request extends BaseEntity<Long> {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @Version
+    @Column(name = "version")
+    private Integer version;
 
     public Request(boolean active, String name, String secondName, LocalDate dateOfBirth, DanceGroup danceGroup, String phoneNumber) {
         super(active);

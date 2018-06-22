@@ -1,6 +1,7 @@
 package com.artsiomtretinnikov.controller;
 
 import com.artsiomtretinnikov.dto.request.CreateRequestDto;
+import com.artsiomtretinnikov.dto.request.RequestDto;
 import com.artsiomtretinnikov.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,14 +36,16 @@ public class RequestController {
     }
 
     @PostMapping("/coach/request/activate")
-    public String activateRequest(@RequestParam("requestId") Long requestId, @RequestHeader("Referer") String referer) {
-        requestService.activation(requestId, true);
+    public String activateRequest(@ModelAttribute("requestDto") RequestDto requestDto, @RequestHeader("Referer") String referer, Model model) {
+        model.addAttribute("requestDto", new RequestDto());
+        requestService.activation(requestDto, true);
         return "redirect:"+ referer;
     }
 
     @PostMapping("/coach/request/deactivate")
-    public String deactivateRequest(@RequestParam("requestId") Long requestId, @RequestHeader("Referer") String referer) {
-        requestService.activation(requestId, false);
+    public String deactivateRequest(@ModelAttribute("requestDto") RequestDto requestDto, @RequestHeader("Referer") String referer, Model model) {
+        model.addAttribute("requestDto", new RequestDto());
+        requestService.activation(requestDto, false);
         return "redirect:"+ referer;
     }
 }
