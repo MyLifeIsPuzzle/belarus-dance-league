@@ -9,11 +9,11 @@
 <div th:insert="~{header::main}"></div>
 
 <div class="container">
-    <h3 align="center">Club name:</h3>
+    <h3 align="center" th:text="#{name}">Club name:</h3>
     <p align="center" th:text="${clubModel.name}">Test</p>
-    <h3 align="center">Club info</h3>
+    <h3 align="center" th:text="#{info}">Club info</h3>
     <p align="center" th:text="${clubModel.info}">Test</p>
-    <h3 align="center">Coaches:</h3>
+    <h3 align="center" th:text="#{coach}">Coaches:</h3>
     <div>
         <table class="table">
             <th:block th:each="aCoach : ${clubModel.coaches}">
@@ -27,7 +27,7 @@
         </table>
     </div>
 
-    <h3 align="center">Dance groups:</h3>
+    <h3 align="center" th:text="#{dancegroups}">Dance groups:</h3>
     <div>
         <table class="table">
             <th:block th:each="aGroup : ${clubModel.danceGroups}">
@@ -42,7 +42,7 @@
 
     <a th:if="${ #authorization.expression('hasRole(''Admin'')')}">
         <th:block th:if="${not #lists.isEmpty(inacitveGroups)}">
-            <h3 align="center">Inactive dance groups:</h3>
+            <h3 align="center" th:text="#{inactivedancegroups}">Inactive dance groups:</h3>
             <div>
                 <table class="table">
                     <th:block th:each="aGroup : ${inacitveGroups}">

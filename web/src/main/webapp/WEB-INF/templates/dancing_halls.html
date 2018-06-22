@@ -11,7 +11,7 @@
 
 <div class="container">
     <div>
-        <h2 align="center">Dance halls:</h2>
+        <h2 align="center" th:text="#{dancehalls}">Dance halls:</h2>
         <table class="table">
             <th:block th:each="danceHall : ${dancingHalls}">
                 <tr align="center">
@@ -26,7 +26,7 @@
     <div th:if="${ #authorization.expression('hasRole(''Admin'')')}">
         <div>
             <th:block th:if="${not #lists.isEmpty(inactiveDancingHalls)}">
-                <h2 align="center">Inactive dance halls:</h2>
+                <h2 align="center" th:text="#{inactivedancehalls}">Inactive dance halls:</h2>
                 <table class="table">
                     <th:block th:each="danceHall : ${inactiveDancingHalls}">
                         <tr align="center">

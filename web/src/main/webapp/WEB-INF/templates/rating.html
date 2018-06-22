@@ -9,7 +9,7 @@
 
 <div class="container">
     <div class="row" align="center">
-        <h1>Ratings</h1>
+        <h1 th:text="#{rating}">Ratings</h1>
     </div>
     <div class="row">
         <div class="form-group col-md-1">
@@ -44,17 +44,16 @@
         </div><br>
 
         <div class="col-md-4 mb-3">
-                <input type="text" class="form-control" id="surnameTyped" placeholder="Surname"
+                <input type="text" class="form-control" id="surnameTyped" th:placeholder="#{surname}"
                      name="surnameParam"  th:value="${inputtedSurname}">
         </div>
 
         <table class="table">
-            <tr>
-                <th>Name and surname</th>
-                <th>Style</th>
-                <th>Age category</th>
-                <th>League</th>
-                <th>Value</th>
+            <tr><th th:text="#{namesurname}">Name and surname</th>
+                <th th:text="#{style}">Style</th>
+                <th th:text="#{agecategory}">Age category</th>
+                <th th:text="#{league}">League</th>
+                <th th:text="#{value}">Value</th>
             </tr>
             <tr th:each="rating : ${ratings}">
                 <td th:text="${rating.dancer.name} + ' ' + ${rating.dancer.secondName}"></td>

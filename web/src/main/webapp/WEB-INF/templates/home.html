@@ -9,14 +9,6 @@
 <body>
 <div th:insert="~{header::main}"></div>
 
-<h1 align="center">WELCOME BACK</h1>
-<!--<div th:if="${ #authorization.expression('isAuthenticated()')}">
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" th:value="Logout"/>
-    </form>
-</div>
-<div th:if="${ #authorization.expression('hasRole(''Coach'')')}">
-Hello coach!
-</div>-->
+<h1 align="center" th:text="#{welcome}">WELCOME BACK</h1>
 </body>
 </html>

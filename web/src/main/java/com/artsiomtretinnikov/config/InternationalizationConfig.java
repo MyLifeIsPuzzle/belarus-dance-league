@@ -27,7 +27,7 @@ public class InternationalizationConfig implements WebMvcConfigurer {
     @Bean
     public SessionLocaleResolver localeResolver() {
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
-        sessionLocaleResolver.setDefaultLocale(Locale.ENGLISH);
+        sessionLocaleResolver.setDefaultLocale(Locale.US);
         return sessionLocaleResolver;
     }
 

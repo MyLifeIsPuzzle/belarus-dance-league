@@ -7,6 +7,8 @@ import com.artsiomtretinnikov.entity.Club;
 import com.artsiomtretinnikov.repository.ClubRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,7 @@ import java.util.Optional;
 
 @Transactional
 @Service
+@CacheConfig(cacheNames = "clubs")
 public class ClubService {
 
     private final ClubRepository clubRepository;
@@ -29,10 +32,12 @@ public class ClubService {
         return club.map(ModelToDtoConverter::clubModelToFullDto).orElse(null);
     }
 
+    @Cacheable
     public List<ClubForAllViewDto> getAll() {
         return ModelToDtoConverter.clubModelListToSimpleDtoList(Lists.newArrayList(clubRepository.findAll()));
     }
 
+    @Cacheable
     public List<ClubForAllViewDto> getAllActive(boolean active) {
         return ModelToDtoConverter.clubModelListToSimpleDtoList(Lists.newArrayList(clubRepository.findAllByActive(Club.class, active)));
     }

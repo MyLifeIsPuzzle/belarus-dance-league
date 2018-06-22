@@ -8,10 +8,10 @@
 </head>
 <body>
 <div th:insert="~{header::main}"></div>
-<h2 align="center">Are you sure?</h2>
+<h2 align="center" th:text="#{rusure}">Are you sure?</h2>
 <div align="center">
     <form th:action="@{/logout}" method="post">
-        <input type="submit" class="btn btn-danger" value="Logout">
+        <input type="submit" class="btn btn-danger" th:value="#{logout}">
     </form>
 </div>
 </body>

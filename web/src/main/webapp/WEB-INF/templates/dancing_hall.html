@@ -10,25 +10,25 @@
 
 <div class="container">
     <div>
-        <h2 align="center">Name:</h2>
+        <h2 align="center" th:text="#{name}">Name:</h2>
         <p align="center" th:text="${dancingHall.name}"></p>
-        <h2 align="center">City:</h2>
+        <h2 align="center" th:text="#{city}">City:</h2>
         <p align="center" th:text="${dancingHall.city}"></p>
-        <h2 align="center">Street:</h2>
+        <h2 align="center" th:text="#{street}">Street:</h2>
         <p align="center" th:text="${dancingHall.street}"></p>
-        <h2 align="center">Hall:</h2>
+        <h2 align="center" th:text="#{hall}">Hall:</h2>
         <p align="center" th:text="${dancingHall.hall}"></p>
     </div>
 
     <div>
-        <h2 align="center">Schedule:</h2>
+        <h2 align="center" th:text="#{schedule}">Schedule:</h2>
         <table class="table">
             <tr>
-                <th>Group name</th>
-                <th>Coach</th>
-                <th>Day of week</th>
-                <th>Time</th>
-                <th>Style</th>
+                <th th:text="#{group}">Group name</th>
+                <th th:text="#{coach}">Coach</th>
+                <th th:text="#{dayofweek}">Day of week</th>
+                <th th:text="#{time}">Time</th>
+                <th th:text="#{style}">Style</th>
             </tr>
             <th:block th:each="danceClass : ${dancingHall.danceClasses}">
                 <tr>
