@@ -1,6 +1,7 @@
 package com.artsiomtretinnikov.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "rating", schema = "dance_league")
 public class Rating extends BaseEntity<Long> {
 

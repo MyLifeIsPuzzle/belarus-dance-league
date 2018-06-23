@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -29,7 +30,7 @@ public class Coach extends BaseHumanInfoEntity {
     @Column(name = "info")
     private String info;
 
-    @OneToMany(mappedBy = "coach")
+    @OneToMany(mappedBy = "coach", fetch = FetchType.EAGER)
     private Set<DanceClass> danceClasses = new HashSet<>();
 
     @OneToOne(mappedBy = "coach")
@@ -38,7 +39,7 @@ public class Coach extends BaseHumanInfoEntity {
     @OneToMany(mappedBy = "id.coach")
     private Set<ClubCoach> clubCoaches;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "club_coach", schema = "dance_league",
             joinColumns = {@JoinColumn(name = "coach_id")},
             inverseJoinColumns = {@JoinColumn(name = "club_id")})
@@ -58,5 +59,10 @@ public class Coach extends BaseHumanInfoEntity {
         super(name, secondName);
         this.info = info;
         this.clubs = clubs;
+    }
+
+    public Coach(String name, String secondName, String info) {
+        super(name, secondName);
+        this.info = info;
     }
 }

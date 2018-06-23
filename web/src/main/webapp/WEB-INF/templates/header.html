@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:fragment="main">
+    <h2>
+        <a href="?language=en_US" th:text="#{english}">English</a><br>
+        <a href="?language=ru_RU" th:text="#{russian}">Русский</a>
+    </h2>
+    <h2 align="center">
+        <a href="/club" th:text="#{club}">Clubs</a>
+        <a> | </a>
+        <a href="/coachView" th:text="#{coach}">Coaches</a>
+        <a> | </a>
+        <a href="/rating" th:text="#{rating}">Rating</a>
+        <a> | </a>
+        <a href="/danceHall" th:text="#{dancehalls}">Dance Halls</a>
+        <a> | </a>
+        <a th:if="${ #authorization.expression('hasRole(''Coach'')')}">
+            <a href="/coach/groups" th:text="#{mygroups}">My groups</a>
+            <a> | </a>
+        </a>
+        <a href="/home" th:text="#{home}">Home</a>
+        <a th:if="${ #authorization.expression('hasRole(''Admin'')')}">
+            <a> | </a>
+            <a href="/admin" th:text="#{admin}">Admin</a>
+        </a>
+        <a th:if="${ #authorization.expression('isAnonymous()')}">
+            <a> | </a>
+            <a href="/login" th:text="#{login}">Login</a>
+        </a>
+        <a th:if="${ #authorization.expression('isAuthenticated()')}">
+            <a> | </a>
+            <a href="/logout" class="text-danger" th:text="#{logout}">Logout</a>
+        </a>
+    </h2>
+</div>
+</body>
+</html>

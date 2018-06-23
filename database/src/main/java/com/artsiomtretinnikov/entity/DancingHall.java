@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.HashSet;
@@ -27,7 +28,7 @@ public class DancingHall extends BaseEntity<Long> {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "dancingHall")
+    @OneToMany(mappedBy = "dancingHall", fetch = FetchType.EAGER)
     private Set<DanceClass> danceClasses = new HashSet<>();
 
     public DancingHall(String name, Address address) {

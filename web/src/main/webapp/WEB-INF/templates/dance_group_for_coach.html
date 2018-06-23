@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{header::main}"></div>
+
+<div class="container">
+    <h2 align="center" th:text="#{group}">Group:</h2>
+    <p align="center" th:text="${danceGroup.name}"></p>
+    <h2 align="center" th:text="#{ofclub}">Group belong to club:</h2>
+    <p align="center">
+        <a th:href="@{'/club/' + ${danceGroup.club.id}}" th:text="${danceGroup.club.name}"></a>
+    </p>
+    <div>
+        <h2 align="center" th:text="#{requests}">Requests:</h2>
+        <table class="table">
+            <tr>
+                <th th:text="#{namesurname}">Name and surname</th>
+                <th th:text="#{phonenumber}">Phone number</th>
+                <th th:text="#{dateofbirth}">Date of birth</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <th:block th:each="request : ${danceGroup.requests}">
+                <tr>
+                    <td th:text="${request.name} + ' ' + ${request.secondName}"></td>
+                    <td th:text="${request.phoneNumber}"></td>
+                    <td th:text="${request.dateOfBirth}"></td>
+                    <td>
+                        <form th:action="@{/coach/dancer}" method="post" th:object="${createRequestDto}">
+                            <input type="submit" class="btn btn-primary" th:value="#{approve}">
+                            <select class="form-control pagination" th:attr="name='league'" required>
+                                <option th:each="league : ${leagues}"
+                                        th:value="${league}"
+                                        th:text="${league}"></option>
+                            </select>
+                            <select class="form-control pagination" th:attr="name='ageCategory'" required>
+                                <option th:each="ageCategory : ${ageCategories}"
+                                        th:value="${ageCategory}"
+                                        th:text="${ageCategory}"></option>
+                            </select>
+                            <input class="form-control" type="hidden" th:attr="name='name'" th:value="${request.name}"/>
+                            <input class="form-control" type="hidden" th:attr="name='secondName'"
+                                   th:value="${request.secondName}"/>
+                            <input class="form-control" type="hidden" th:attr="name='phoneNumber'"
+                                   th:value="${request.phoneNumber}"/>
+                            <input class="form-control" type="hidden" th:attr="name='dateOfBirth'"
+                                   th:value="${request.dateOfBirth}"/>
+                            <input class="form-control" type="hidden" th:attr="name='danceGroupId'"
+                                   th:value="${request.groupId}"/>
+                            <input class="form-control" type="hidden" th:attr="name='requestId'"
+                                   th:value="${request.id}"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/coach/request/deactivate}" method="post" th:object="${requestDto}">
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='id'" th:value="${request.id}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='name'" th:value="${request.name}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='secondName'" th:value="${request.secondName}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='dateOfBirth'" th:value="${request.dateOfBirth}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='groupId'" th:value="${request.groupId}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='phoneNumber'" th:value="${request.phoneNumber}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='active'" th:value="${request.active}"/>
+                            </p>
+                            <p>
+                                <input class="form-control" type="hidden" th:attr="name='version'" th:value="${request.version}"/>
+                            </p>
+                            <input type="submit" class="btn btn-danger" th:value="#{reject}">
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+
+    <div>
+        <th:block th:if="${not #lists.isEmpty(inactiveRequests)}">
+            <h2 align="center">Inactive requests:</h2>
+            <table class="table">
+                <tr>
+                    <th th:text="#{namesurname}">Name and surname</th>
+                    <th th:text="#{phonenumber}">Phone number</th>
+                    <th th:text="#{dateofbirth}">Date of birth</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <th:block th:each="request : ${inactiveRequests}">
+                    <tr>
+                        <td th:text="${request.name} + ' ' + ${request.secondName}"></td>
+                        <td th:text="${request.phoneNumber}"></td>
+                        <td th:text="${request.dateOfBirth}"></td>
+                        <td>
+                            <form th:action="@{/coach/request/activate}" method="post" th:object="${requestDto}">
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='id'" th:value="${request.id}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='name'" th:value="${request.name}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='secondName'" th:value="${request.secondName}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='dateOfBirth'" th:value="${request.dateOfBirth}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='groupId'" th:value="${request.groupId}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='phoneNumber'" th:value="${request.phoneNumber}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='active'" th:value="${request.active}"/>
+                                </p>
+                                <p>
+                                    <input class="form-control" type="hidden" th:attr="name='version'" th:value="${request.version}"/>
+                                </p>
+                                <input type="submit" class="btn btn-primary" th:value="#{activate}">
+                            </form>
+                        </td>
+                        <td>
+                            <form th:action="@{/coach/request/delete}" method="post">
+                                <input class="form-control" type="hidden" th:attr="name='requestId'"
+                                       th:value="${request.id}"/>
+                                <input type="submit" class="btn btn-danger" th:value="#{delete}">
+                            </form>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+        </th:block>
+    </div>
+
+    <div>
+        <h2 align="center" th:text="#{dancers}">Dancers:</h2>
+        <table class="table">
+            <tr>
+                <th th:text="#{namesurname}">Name and surname</th>
+                <th th:text="#{dateofbirth}">Date of birth</th>
+                <th th:text="#{phonenumber}">Phone number</th>
+                <th th:text="#{agecategory}">Age category</th>
+                <th th:text="#{league}">League</th>
+                <th th:text="#{style}">Style</th>
+                <th th:text="#{value}">Value</th>
+                <th></th>
+            </tr>
+            <th:block th:each="dancer : ${danceGroup.dancers}">
+                <tr>
+                    <td th:text="${dancer.name} + ' ' + ${dancer.secondName}"></td>
+                    <td th:text="${dancer.dateOfBirth}"></td>
+                    <td th:text="${dancer.phoneNumber}"></td>
+                    <td th:text="${dancer.ageCategory}"></td>
+                    <td th:text="${dancer.league}"></td>
+                    <td>
+                        <th:block th:each="aRating : ${dancer.ratings}">
+                            <span th:text="${aRating.style}"></span><br>
+                        </th:block>
+                    </td>
+                    <td>
+                        <th:block th:each="aRating : ${dancer.ratings}">
+                            <span th:text="${aRating.value}"></span><br>
+                        </th:block>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+
+    <div>
+        <th:block th:if="${not #lists.isEmpty(inactiveDancers)}">
+            <h2 align="center" th:text="#{inactivedancers}">Inactive dancers:</h2>
+            <table class="table">
+                <tr>
+                    <th th:text="#{namesurname}">Name and surname</th>
+                    <th th:text="#{agecategory}">Age category</th>
+                    <th th:text="#{league}">League</th>
+                    <th th:text="#{dateofbirth}">Date of birth</th>
+                    <th th:text="#{phonenumber}">Phone number</th>
+                    <th th:text="#{style}">Style</th>
+                    <th th:text="#{value}">Value</th>
+                </tr>
+                <th:block th:each="dancer : ${inactiveDancers}">
+                    <tr>
+                        <td th:text="${dancer.name} + ' ' + ${dancer.secondName}"></td>
+                        <td th:text="${dancer.ageCategory}"></td>
+                        <td th:text="${dancer.league}"></td>
+                        <td th:text="${dancer.dateOfBirth}"></td>
+                        <td th:text="${dancer.phoneNumber}"></td>
+                        <td>
+                            <th:block th:each="aRating : ${dancer.ratings}">
+                                <span th:text="${aRating.style}"></span><br>
+                            </th:block>
+                        </td>
+                        <td>
+                            <th:block th:each="aRating : ${dancer.ratings}">
+                                <span th:text="${aRating.value}"></span><br>
+                            </th:block>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+        </th:block>
+    </div>
+
+
+    <div>
+        <h2 align="center" th:text="#{schedule}">Schedule:</h2>
+        <table class="table">
+            <tr>
+                <th th:text="#{group}">Group name</th>
+                <th th:text="#{dancehall}">Dance hall</th>
+                <th th:text="#{dayofweek}">Day of week</th>
+                <th th:text="#{time}">Time</th>
+                <th th:text="#{style}">Style</th>
+            </tr>
+            <th:block th:each="danceClass : ${danceGroup.danceClasses}">
+                <tr>
+                    <td>
+                        <a th:href="@{'/danceHall/' + ${danceClass.danceHall.id}}"
+                           th:text="${danceClass.danceHall.name}"></a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/coach/' + ${danceClass.coach.id}}"
+                           th:text="${danceClass.coach.name} + ' ' +${danceClass.coach.secondName}"></a>
+                    </td>
+                    <td th:text="${danceClass.dayOfWeek}"></td>
+                    <td th:text="${danceClass.time}"></td>
+                    <td th:text="${danceClass.style}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+
+    <div>
+        <th:block th:if="${not #lists.isEmpty(inactiveDanceClasses)}">
+            <h2 align="center" th:text="#{inactivedanceclasses}">Inactive dance classes:</h2>
+            <table class="table">
+                <tr>
+                    <th th:text="#{group}">Group name</th>
+                    <th th:text="#{dancehall}">Dance hall</th>
+                    <th th:text="#{dayofweek}">Day of week</th>
+                    <th th:text="#{time}">Time</th>
+                    <th th:text="#{style}">Style</th>
+                </tr>
+                <th:block th:each="danceClass : ${inactiveDanceClasses}">
+                    <tr>
+                        <td>
+                            <a th:href="@{'/danceHall/' + ${danceClass.danceHall.id}}"
+                               th:text="${danceClass.danceHall.name}"></a>
+                        </td>
+                        <td>
+                            <a th:href="@{'/coach/' + ${danceClass.coach.id}}"
+                               th:text="${danceClass.coach.name} + ' ' +${danceClass.coach.secondName}"></a>
+                        </td>
+                        <td th:text="${danceClass.dayOfWeek}"></td>
+                        <td th:text="${danceClass.time}"></td>
+                        <td th:text="${danceClass.style}"></td>
+                    </tr>
+                </th:block>
+            </table>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>

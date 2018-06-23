@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Coach page</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{header::main}"></div>
+
+<div class="container">
+        <h2 align="center" th:text="#{namesurname}">Coach name and surname:</h2>
+        <p align="center" th:align="center" th:text="${coachModel.name} + ' ' + ${coachModel.secondName}"></p>
+        <h2 align="center" th:text="#{info}">Coach info:</h2>
+        <p align="center" th:text="${coachModel.info}"></p>
+        <h2 align="center" th:text="#{email}">Coach email:</h2>
+        <p align="center" th:text="${coachModel.account.email}"></p>
+
+        <div>
+            <h2 align="center" th:text="#{club}">Coach clubs:</h2>
+            <table class="table" align="center">
+                <th:block th:each="aClub : ${coachModel.clubs}">
+                    <tr align="center">
+                        <td>
+                            <a th:href="@{'/club/' + ${aClub.id}}" th:text="${aClub.name}"></a>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+
+        <div>
+            <h2  align="center" th:text="#{schedule}">Schedule:</h2>
+            <table class="table" align="center">
+                <tr>
+                    <th th:text="#{group}">Group name</th>
+                    <th th:text="#{dancehall}">Dance hall</th>
+                    <th th:text="#{dayofweek}">Day of week</th>
+                    <th th:text="#{time}">Time</th>
+                    <th th:text="#{style}">Style</th>
+                </tr>
+                <th:block th:each="danceClass : ${coachModel.danceClasses}">
+                    <tr>
+                        <td><a th:href="@{'/danceGroup/' + ${danceClass.group.id}}"
+                               th:text="${danceClass.group.name}"></a>
+                        </td>
+                        <td><a th:href="@{'/danceHall/' + ${danceClass.danceHall.id}}"
+                               th:text="${danceClass.danceHall.name}"></a>
+                        </td>
+                        <td th:text="${danceClass.dayOfWeek}"></td>
+                        <td th:text="${danceClass.time}"></td>
+                        <td th:text="${danceClass.style}"></td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+</div>
+</body>
+</html>

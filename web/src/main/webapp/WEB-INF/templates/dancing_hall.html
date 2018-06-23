@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dancing hall</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{header::main}"></div>
+
+<div class="container">
+    <div>
+        <h2 align="center" th:text="#{name}">Name:</h2>
+        <p align="center" th:text="${dancingHall.name}"></p>
+        <h2 align="center" th:text="#{city}">City:</h2>
+        <p align="center" th:text="${dancingHall.city}"></p>
+        <h2 align="center" th:text="#{street}">Street:</h2>
+        <p align="center" th:text="${dancingHall.street}"></p>
+        <h2 align="center" th:text="#{hall}">Hall:</h2>
+        <p align="center" th:text="${dancingHall.hall}"></p>
+    </div>
+
+    <div>
+        <h2 align="center" th:text="#{schedule}">Schedule:</h2>
+        <table class="table">
+            <tr>
+                <th th:text="#{group}">Group name</th>
+                <th th:text="#{coach}">Coach</th>
+                <th th:text="#{dayofweek}">Day of week</th>
+                <th th:text="#{time}">Time</th>
+                <th th:text="#{style}">Style</th>
+            </tr>
+            <th:block th:each="danceClass : ${dancingHall.danceClasses}">
+                <tr>
+                    <td>
+                        <a th:href="@{'/danceGroup/' + ${danceClass.group.id}}" th:text="${danceClass.group.name}"></a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/coachView/' + ${danceClass.coach.id}}"
+                           th:text="${danceClass.coach.name} + ' ' +${danceClass.coach.secondName}"></a>
+                    </td>
+                    <td th:text="${danceClass.dayOfWeek}"></td>
+                    <td th:text="${danceClass.time}"></td>
+                    <td th:text="${danceClass.style}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</div>
+</body>
+</html>

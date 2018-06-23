@@ -33,4 +33,10 @@ public class Account extends BaseEntity<Long> {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    public Account(String email, String password) {
+        super();
+        this.email = email;
+        this.password = password;
+    }
 }

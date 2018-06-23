@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,10 +31,10 @@ public class Club extends BaseEntity<Long> {
     @OneToMany(mappedBy = "id.club")
     private Set<ClubCoach> clubCoaches;
 
-    @OneToMany(mappedBy = "club")
+    @OneToMany(mappedBy = "club", fetch = FetchType.EAGER)
     private Set<DanceGroup> danceGroups;
 
-    @ManyToMany(mappedBy = "clubs")
+    @ManyToMany(mappedBy = "clubs", fetch = FetchType.EAGER)
     private Set<Coach> coaches = new HashSet<>();
 
     public Club(String name, String info) {

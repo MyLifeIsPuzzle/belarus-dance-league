@@ -7,11 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DancingHallRepository extends CrudRepository<DancingHall, Long> {
-
-    List<DancingHall> findAllByActiveTrue();
-
-    List<DancingHall> findAllByActiveFalse();
+public interface DancingHallRepository extends CrudRepository<DancingHall, Long>, ActiveRepository<DancingHall> {
 
     List<DancingHall> findAllByAddressStreetContainsIgnoreCase(String name);
 }

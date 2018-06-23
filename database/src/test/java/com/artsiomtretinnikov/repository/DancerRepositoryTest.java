@@ -27,6 +27,9 @@ public class DancerRepositoryTest {
     @Autowired
     private DancerRepository dancerRepository;
 
+    @Autowired
+    private DanceGroupRepository danceGroupRepository;
+
     @Before
     public void init() {
         databaseHelper.cleanDatabase();

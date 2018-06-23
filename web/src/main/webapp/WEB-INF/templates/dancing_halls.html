@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dancing Halls</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{header::main}"></div>
+
+<div class="container">
+    <div>
+        <h2 align="center" th:text="#{dancehalls}">Dance halls:</h2>
+        <table class="table">
+            <th:block th:each="danceHall : ${dancingHalls}">
+                <tr align="center">
+                    <td>
+                        <a th:href="@{'/danceHall/' + ${danceHall.id}}" th:text="${danceHall.name}"></a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+
+    <div th:if="${ #authorization.expression('hasRole(''Admin'')')}">
+        <div>
+            <th:block th:if="${not #lists.isEmpty(inactiveDancingHalls)}">
+                <h2 align="center" th:text="#{inactivedancehalls}">Inactive dance halls:</h2>
+                <table class="table">
+                    <th:block th:each="danceHall : ${inactiveDancingHalls}">
+                        <tr align="center">
+                            <td>
+                                <a th:href="@{'/danceHall/' + ${danceHall.id}}" th:text="${danceHall.name}"></a>
+                            </td>
+                        </tr>
+                    </th:block>
+                </table>
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

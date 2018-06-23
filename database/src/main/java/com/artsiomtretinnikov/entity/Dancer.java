@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -16,9 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -41,7 +40,7 @@ public class Dancer extends BaseHumanInfoEntity {
     @Enumerated(EnumType.STRING)
     private League league;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "dancer_dance_group", schema = "dance_league",
             joinColumns = {@JoinColumn(name = "dancer_id")},
             inverseJoinColumns = {@JoinColumn(name = "dance_group_id")})
@@ -50,8 +49,8 @@ public class Dancer extends BaseHumanInfoEntity {
     @OneToMany(mappedBy = "id.dancer")
     private Set<DancerDanceGroup> dancerDanceGroups;
 
-    @OneToMany(mappedBy = "dancer")
-    private List<Rating> ratings = new ArrayList<>();
+    @OneToMany(mappedBy = "dancer", fetch = FetchType.EAGER)
+    private Set<Rating> ratings = new HashSet<>();
 
     @Column(name = "phone_number")
     private String phoneNumber;

@@ -3,7 +3,6 @@ package com.artsiomtretinnikov.repository;
 import com.artsiomtretinnikov.config.TestDatabaseConfig;
 import com.artsiomtretinnikov.entity.DancingHall;
 import com.artsiomtretinnikov.util.DatabaseHelper;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestDatabaseConfig.class)
@@ -36,6 +36,6 @@ public class DancingHallRepositoryTest {
     @Test
     public void findByStreetTest() {
         List<DancingHall> result = dancingHallRepository.findAllByAddressStreetContainsIgnoreCase("Belsk");
-        assertThat(result, Matchers.hasSize(1));
+        assertThat(result, hasSize(1));
     }
 }

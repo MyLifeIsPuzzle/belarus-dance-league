@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All coaches</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{header::main}"></div>
+
+<div class="container">
+    <div>
+        <h2 align="center" th:text="#{coach}">Coaches:</h2>
+        <table class="table">
+            <th:block th:each="aCoach : ${coachesList}">
+                <tr align="center">
+                    <td>
+                        <a th:href="@{'/coachView/' + ${aCoach.id}}"
+                           th:text="${aCoach.name} + ' ' +${aCoach.secondName}"></a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+
+    <div th:if="${ #authorization.expression('hasRole(''Admin'')')}">
+        <div>
+            <th:block th:if="${not #lists.isEmpty(inactiveCoachesList)}">
+                <h2 align="center" th:text="#{inactivecoaches}">Inactive coaches:</h2>
+                <table class="table">
+                    <th:block th:each="aCoach : ${inactiveCoachesList}">
+                        <tr align="center">
+                            <td>
+                                <p th:text="${aCoach.name} + ' ' +${aCoach.secondName}"></p>
+                            </td>
+                        </tr>
+                    </th:block>
+                </table>
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

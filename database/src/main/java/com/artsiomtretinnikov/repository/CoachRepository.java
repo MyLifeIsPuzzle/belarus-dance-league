@@ -7,11 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CoachRepository extends CrudRepository<Coach, Long> {
-
-    List<Coach> findAllByActiveTrue();
-
-    List<Coach> findAllByActiveFalse();
+public interface CoachRepository extends CrudRepository<Coach, Long>, ActiveRepository<Coach> {
 
     List<Coach> findAllBySecondNameContainsIgnoreCase(String secondName);
 }
