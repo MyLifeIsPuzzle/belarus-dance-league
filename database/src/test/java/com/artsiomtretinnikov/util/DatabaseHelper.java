@@ -135,7 +135,7 @@ public class DatabaseHelper {
         entityManager.persist(new Rating(dancerOne, 121, Style.DISCO));
         entityManager.persist(new Rating(dancerOne, 141, Style.DISCO));
 
-        Request request = new Request(true, "Vladislava", "Lavrukhina", LocalDate.now(), archers, "123-12-12");
+        Request request = new Request("Vladislava", "Lavrukhina", LocalDate.now(), archers, "123-12-12",5);
         entityManager.persist(request);
 
         entityManager.getTransaction().commit();
